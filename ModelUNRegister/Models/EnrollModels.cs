@@ -10,40 +10,26 @@ namespace ModelUNRegister.Models
 {
     public class EnrollRequest
     {
-        [Key, Required]
+        [Key]
         public Guid RequestId { get; set; }
 
         [Required]
+        [Display(Name = "姓名")]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "所在学校")]
         public string School { get; set; }
 
-        [Required]
+        //[Required]
         public DateTime RegisterTime { get; set; }
 
         [Required]
+        [Display(Name = "自我介绍")]
         public string SelfIntroduction { get; set; }
 
-        [Required]
-        public byte[] IPAddressData { get; set; }
-
-        private IPAddress _IPAddress;
-        [NotMapped]
-        public IPAddress IPAddress
-        {
-            get
-            {
-                if (_IPAddress == null)
-                    _IPAddress = new IPAddress(IPAddressData);
-                return _IPAddress;
-            }
-            set
-            {
-                IPAddressData = value.GetAddressBytes();
-                _IPAddress = value;
-            }
-        }
+        //[Required]
+        public string IPAddress { get; set; }
 
     }
 }
