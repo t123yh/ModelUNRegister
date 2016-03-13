@@ -99,7 +99,7 @@ namespace ModelUNRegister.Utilities
                 currentValue = metadata.Model as Enum;
             }
 
-            IList<SelectListItem> selectList = EnumHelper.GetSelectList(metadata.ModelType, currentValue);
+            IList<SelectListItem> selectList = EnumHelper.GetSelectList(metadata.ModelType, null);
 
             return EnumToggleRadioButtonHelper(htmlHelper, metadata, expressionName, expression, selectList, htmlAttributesDictionary);
         }
@@ -160,7 +160,7 @@ namespace ModelUNRegister.Utilities
             object defaultValue = htmlHelper.GetModelStateValue(fullName, typeof(string));
 
             // If we haven't already used ViewData to get the entire list of items then we need to
-            // use the ViewData-supplied value before using the parameter-supplied value.
+            // use the ViewData - supplied value before using the parameter-supplied value.
             if (defaultValue == null && !String.IsNullOrEmpty(name))
             {
                 if (metadata != null)
@@ -174,21 +174,25 @@ namespace ModelUNRegister.Utilities
                 selectList = GetSelectListWithDefaultValue(selectList, defaultValue, false);
             }
 
-
             StringBuilder listItemBuilder = new StringBuilder();
 
             foreach (SelectListItem item in selectList)
             {
-                TagBuilder builder = new TagBuilder("label");
-                builder.AddCssClass("btn btn-primary");
-                if (item.Selected)
+                // Empty is for null compatiblility
+                if (item.Text != String.Empty && item.Value != String.Empty)
                 {
-                    builder.AddCssClass("active");
-                }
-                builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value, htmlAttributes).ToHtmlString()
-                    + HttpUtility.HtmlEncode(item.Text);
+                    TagBuilder builder = new TagBuilder("label");
+                    builder.AddCssClass("btn btn-primary");
+                    if (item.Selected)
+                    {
+                        builder.AddCssClass("active");
+                    }
 
-                listItemBuilder.AppendLine(builder.ToString(TagRenderMode.Normal));
+                    builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value, htmlAttributes).ToHtmlString()
+                        + HttpUtility.HtmlEncode(item.Text);
+
+                    listItemBuilder.AppendLine(builder.ToString(TagRenderMode.Normal));
+                }
             }
 
             TagBuilder tagBuilder = new TagBuilder("div")
