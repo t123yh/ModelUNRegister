@@ -185,7 +185,7 @@ namespace ModelUNRegister.Utilities
                 {
                     builder.AddCssClass("active");
                 }
-                builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value).ToHtmlString()
+                builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value, htmlAttributes).ToHtmlString()
                     + HttpUtility.HtmlEncode(item.Text);
 
                 listItemBuilder.AppendLine(builder.ToString(TagRenderMode.Normal));
