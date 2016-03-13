@@ -1,4 +1,5 @@
 ﻿@using ModelUNRegister.Models
+@using ModelUNRegister.Utilities
 @model EnrollRequest
 @{
     ViewBag.Title = "报名";
@@ -21,6 +22,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EnumToggleRadioButtonFor(m => m.Gender, new { @class = "btn-primary" })
+                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
                     @Html.LabelFor(m => m.School, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.School, new { @class = "form-control" })
@@ -28,15 +36,40 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.SelfIntroduction, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Grade, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextAreaFor(m => m.SelfIntroduction, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.SelfIntroduction, "", new { @class = "text-danger" })
+                        @Html.EnumToggleRadioButtonFor(m => m.Grade, new { @class = "btn-primary" })
+                        @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.QQNumber, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.QQNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.QQNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="提交" class="btn btn-default" />
+                        <input type="submit" value="提交" class="btn btn-success" />
                     </div>
                 </div>
             }

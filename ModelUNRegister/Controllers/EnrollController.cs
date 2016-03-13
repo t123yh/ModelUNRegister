@@ -24,12 +24,12 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,School,SelfIntroduction")] EnrollRequest enrollRequest)
+        public ActionResult Create([Bind(Include = "Name,School,Gender,Grade,Email,PhoneNumber,QQNumber")] EnrollRequest enrollRequest)
         {
             if (ModelState.IsValid)
             {
                 enrollRequest.RequestId = Guid.NewGuid();
-                enrollRequest.RegisterTime = DateTime.Now;
+                enrollRequest.RegistrationTime = DateTime.Now;
                 enrollRequest.IPAddress = Request.UserHostAddress;
                 db.EnrollRequests.Add(enrollRequest);
                 db.SaveChanges();
