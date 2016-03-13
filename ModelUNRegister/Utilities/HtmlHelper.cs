@@ -182,13 +182,14 @@ namespace ModelUNRegister.Utilities
                 if (item.Text != String.Empty && item.Value != String.Empty)
                 {
                     TagBuilder builder = new TagBuilder("label");
-                    builder.AddCssClass("btn btn-primary");
+                    builder.MergeAttributes(htmlAttributes);
+                    builder.AddCssClass("btn");
                     if (item.Selected)
                     {
                         builder.AddCssClass("active");
                     }
 
-                    builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value, htmlAttributes).ToHtmlString()
+                    builder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value).ToHtmlString()
                         + HttpUtility.HtmlEncode(item.Text);
 
                     listItemBuilder.AppendLine(builder.ToString(TagRenderMode.Normal));
