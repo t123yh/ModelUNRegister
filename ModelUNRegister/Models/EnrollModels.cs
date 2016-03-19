@@ -14,8 +14,6 @@ namespace ModelUNRegister.Models
         Male,
         [Display(Name = "女")]
         Female,
-        [Display(Name = "其它")]
-        Other,
     }
 
     public enum Grade
