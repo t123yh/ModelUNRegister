@@ -23,9 +23,15 @@ namespace ModelUNRegister
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-material-design").Include(
+          "~/Scripts/ripples.js",
+          "~/Scripts/material.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/ripples.css",
+                      "~/Content/bootstrap-material-design.css"));
         }
     }
 }
