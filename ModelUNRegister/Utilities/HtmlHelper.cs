@@ -14,7 +14,13 @@ using System.Web.Mvc.Html;
 
 namespace ModelUNRegister.Utilities
 {
-    public static class BootstrapStyleToggleRadioButtonExtension
+    public enum BootstrapRadioButtonStyle
+    {
+        BootstrapToogleButton,
+        RadioButton
+    }
+
+    public static class EnumRadioButtonExtension
     {
         internal static object GetModelStateValue(this HtmlHelper helper, string key, Type destinationType)
         {
@@ -31,19 +37,19 @@ namespace ModelUNRegister.Utilities
 
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
             Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString EnumToggleRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TEnum>> expression)
+        public static MvcHtmlString EnumRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TEnum>> expression, BootstrapRadioButtonStyle style = BootstrapRadioButtonStyle.RadioButton)
         {
-            return EnumToggleRadioButtonFor(htmlHelper, expression, htmlAttributes: null);
+            return EnumRadioButtonFor(htmlHelper, expression, htmlAttributes: null, style: style);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
             Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString EnumToggleRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TEnum>> expression, object htmlAttributes)
+        public static MvcHtmlString EnumRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TEnum>> expression, object htmlAttributes, BootstrapRadioButtonStyle style = BootstrapRadioButtonStyle.RadioButton)
         {
-            return EnumToggleRadioButtonFor(htmlHelper, expression,
-                htmlAttributesDictionary: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return EnumRadioButtonFor(htmlHelper, expression,
+                htmlAttributesDictionary: HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), style: style);
         }
 
         // Unable to constrain TEnum.  Cannot include IComparable, IConvertible, IFormattable because Nullable<T> does
@@ -52,8 +58,8 @@ namespace ModelUNRegister.Utilities
         // Nullable<T> expression.
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
             Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString EnumToggleRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TEnum>> expression, IDictionary<string, object> htmlAttributesDictionary)
+        public static MvcHtmlString EnumRadioButtonFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TEnum>> expression, IDictionary<string, object> htmlAttributesDictionary, BootstrapRadioButtonStyle style = BootstrapRadioButtonStyle.RadioButton)
         {
             if (expression == null)
             {
@@ -101,12 +107,12 @@ namespace ModelUNRegister.Utilities
 
             IList<SelectListItem> selectList = EnumHelper.GetSelectList(metadata.ModelType, null);
 
-            return EnumToggleRadioButtonHelper(htmlHelper, metadata, expressionName, expression, selectList, htmlAttributesDictionary);
+            return EnumRadioButtonHelper(htmlHelper, metadata, expressionName, expression, selectList, htmlAttributesDictionary, style);
         }
 
-        private static MvcHtmlString EnumToggleRadioButtonHelper<TModel, TEnum>(HtmlHelper<TModel> htmlHelper, ModelMetadata metadata, string expression, Expression<Func<TModel, TEnum>> lambdaExpression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
+        private static MvcHtmlString EnumRadioButtonHelper<TModel, TEnum>(HtmlHelper<TModel> htmlHelper, ModelMetadata metadata, string expression, Expression<Func<TModel, TEnum>> lambdaExpression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes, BootstrapRadioButtonStyle style)
         {
-            return SelectInternal(htmlHelper, metadata, expression, lambdaExpression, selectList, htmlAttributes: htmlAttributes);
+            return SelectInternal(htmlHelper, metadata, expression, lambdaExpression, selectList, htmlAttributes: htmlAttributes, style: style);
         }
 
         // Helper methods
@@ -146,34 +152,8 @@ namespace ModelUNRegister.Utilities
             return newSelectList;
         }
 
-        private static MvcHtmlString SelectInternal<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, ModelMetadata metadata,
-            string name, Expression<Func<TModel, TEnum>> lambdaExpression,
-            IEnumerable<SelectListItem> selectList,
-            IDictionary<string, object> htmlAttributes)
+        private static string BootstrapToggleButtonBuilder<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> lambdaExpression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
-            string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
-            if (String.IsNullOrEmpty(fullName))
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            object defaultValue = htmlHelper.GetModelStateValue(fullName, typeof(string));
-
-            // If we haven't already used ViewData to get the entire list of items then we need to
-            // use the ViewData - supplied value before using the parameter-supplied value.
-            if (defaultValue == null && !String.IsNullOrEmpty(name))
-            {
-                if (metadata != null)
-                {
-                    defaultValue = metadata.Model;
-                }
-            }
-
-            if (defaultValue != null)
-            {
-                selectList = GetSelectListWithDefaultValue(selectList, defaultValue, false);
-            }
-
             StringBuilder listItemBuilder = new StringBuilder();
 
             foreach (SelectListItem item in selectList)
@@ -204,7 +184,82 @@ namespace ModelUNRegister.Utilities
             tagBuilder.MergeAttribute("class", "btn-group");
             tagBuilder.MergeAttribute("data-toggle", "buttons");
 
-            return new MvcHtmlString(tagBuilder.ToString(TagRenderMode.Normal));
+            return tagBuilder.ToString(TagRenderMode.Normal);
+        }
+
+        private static string RadioButtonBuilder<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> lambdaExpression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
+        {
+            StringBuilder listItemBuilder = new StringBuilder();
+
+            foreach (SelectListItem item in selectList)
+            {
+                // Empty is for null compatiblility
+                if (item.Text != String.Empty && item.Value != String.Empty)
+                {
+                    TagBuilder labelbuilder = new TagBuilder("label");
+
+                    labelbuilder.InnerHtml = htmlHelper.RadioButtonFor(lambdaExpression, item.Value).ToHtmlString()
+                                    + HttpUtility.HtmlEncode(item.Text);
+
+                    TagBuilder divBuilder = new TagBuilder("div")
+                    {
+                        InnerHtml = labelbuilder.ToString()
+                    };
+
+                    divBuilder.AddCssClass("radio");
+                    divBuilder.MergeAttributes(htmlAttributes);
+
+                    listItemBuilder.AppendLine(divBuilder.ToString(TagRenderMode.Normal));
+                }
+            }
+            return listItemBuilder.ToString();
+        }
+
+        private static MvcHtmlString SelectInternal<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, ModelMetadata metadata,
+            string name, Expression<Func<TModel, TEnum>> lambdaExpression,
+            IEnumerable<SelectListItem> selectList,
+            IDictionary<string, object> htmlAttributes, BootstrapRadioButtonStyle style)
+        {
+            string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            if (String.IsNullOrEmpty(fullName))
+            {
+                throw new ArgumentNullException("name");
+            }
+
+            object defaultValue = htmlHelper.GetModelStateValue(fullName, typeof(string));
+
+            // If we haven't already used ViewData to get the entire list of items then we need to
+            // use the ViewData - supplied value before using the parameter-supplied value.
+            if (defaultValue == null && !String.IsNullOrEmpty(name))
+            {
+                if (metadata != null)
+                {
+                    defaultValue = metadata.Model;
+                }
+            }
+
+            if (defaultValue != null)
+            {
+                selectList = GetSelectListWithDefaultValue(selectList, defaultValue, false);
+            }
+
+            string content;
+            switch (style)
+            {
+                case BootstrapRadioButtonStyle.BootstrapToogleButton:
+                    content = BootstrapToggleButtonBuilder(htmlHelper, lambdaExpression, selectList, htmlAttributes);
+                    break;
+                case BootstrapRadioButtonStyle.RadioButton:
+                    content = RadioButtonBuilder(htmlHelper, lambdaExpression, selectList, htmlAttributes);
+                    break;
+                default:
+                    content = "";
+                    break;
+            }
+
+
+
+            return new MvcHtmlString(content);
         }
     }
 }
