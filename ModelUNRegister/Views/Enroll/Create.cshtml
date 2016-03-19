@@ -13,38 +13,62 @@
             {
                 @Html.AntiForgeryToken()
                 <h4>现在报名元峰会。</h4>
+
+                @*<div class="form-group">
+                        <label class="col-md-2 control-label">Radios</label>
+                        <div class="col-md-10">
+                            <div class="radio radio-primary">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                    Option one is this
+                                </label>
+                            </div>
+                            <div class="radio radio-primary">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    Option two can be something else
+                                </label>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Gender, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EnumToggleRadioButtonFor(m => m.Gender, new { @class = "btn-primary" })
+                        @Html.EnumRadioButtonFor(m => m.Gender, new { @class = "radio-primary" })
                         @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.School, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.School, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.School, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.School, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Grade, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Grade, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EnumToggleRadioButtonFor(m => m.Grade, new { @class = "btn-primary" })
+                        @Html.EnumRadioButtonFor(m => m.Grade, new { @class = "radio-primary" })
                         @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -52,7 +76,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
@@ -60,7 +84,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.QQNumber, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.QQNumber, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.QQNumber, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.QQNumber, "", new { @class = "text-danger" })
@@ -69,7 +93,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="提交" class="btn btn-success" />
+                        <input type="submit" value="提交" class="btn btn-primary btn-raised" />
                     </div>
                 </div>
             }
