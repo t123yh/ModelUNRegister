@@ -27,6 +27,9 @@ namespace ModelUNRegister
           "~/Scripts/ripples.js",
           "~/Scripts/material.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/global-scripts").Include(
+            "~/Scripts/global.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
