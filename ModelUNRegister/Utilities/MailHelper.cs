@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace ModelUNRegister.Utilities
@@ -20,7 +21,7 @@ namespace ModelUNRegister.Utilities
         /// <param name="smtpSsl">指示是否要使用 SSL。</param>
         /// <param name="sourceAddress">发件者邮件地址。</param>
         /// <param name="password">发件者密码。</param>
-        public static async void SendAsync(string body,
+        public static async Task SendAsync(string body,
             string subject,
             string recipient,
             string smtpServer,
