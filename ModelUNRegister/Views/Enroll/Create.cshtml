@@ -8,8 +8,8 @@
 <h2>报名</h2>
 <div class="row">
     <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Create", "Enroll", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        <section id="createFormSection">
+            @using (Html.BeginForm("Create", "Enroll", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "createForm" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>现在报名元峰会。</h4>
@@ -73,10 +73,42 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="提交" class="btn btn-primary btn-raised" />
+
+                        <button type="button" class="btn btn-primary btn-raised" id="baseInfoSubmit">
+                            提交
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="EmailModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">电子邮件地址验证</h4>
+                            </div>
+                            <div class="modal-body">
+                                <span id="emailMessage"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="确定" class="btn btn-primary" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
         </section>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        $("#baseInfoSubmit").click(function () {
+            if($("#createForm").valid())
+            {
+                $("#emailMessage").text("我们将向你的电子邮件地址 {0} 发送一封电子邮件，其中将包含一个链接，指引你填写报名问题。".format($("#Email").text()));
+                $('#emailModal').modal('show');
+            }
+        })
+    </script>
+}
