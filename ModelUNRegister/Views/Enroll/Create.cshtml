@@ -102,11 +102,17 @@
 </div>
 
 @section scripts {
+    <script id="emailPrompt" type="x-tmpl-mustache">
+        我们将向你的电子邮件地址 {{email}} 发送一封电子邮件，其中将包含一个链接，指引你填写报名问题。
+    </script>
     <script>
+
         $("#baseInfoSubmit").click(function () {
-            if($("#createForm").valid())
-            {
-                $("#emailMessage").text("我们将向你的电子邮件地址 {0} 发送一封电子邮件，其中将包含一个链接，指引你填写报名问题。".format($("#Email").text()));
+            if ($("#createForm").valid()) {
+                var template = $("#emailPrompt").html();
+                Mustache.parse(template);
+                var rendered = Mustache.render(template, { email: $("#Email").val()});
+                $("#emailMessage").text(rendered);
                 $('#emailModal').modal('show');
             }
         })
