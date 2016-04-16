@@ -29,7 +29,7 @@ namespace ModelUNRegister.Controllers
             if (ModelState.IsValid)
             {
                 enrollRequest.RequestId = Guid.NewGuid();
-                enrollRequest.RegistrationTime = DateTime.Now;
+                enrollRequest.SubmissionTime = DateTime.Now;
                 enrollRequest.IPAddress = Request.UserHostAddress;
                 db.EnrollRequests.Add(enrollRequest);
                 db.SaveChanges();
