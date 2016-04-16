@@ -51,7 +51,7 @@ namespace ModelUNRegister.Models
 
         public bool EmailVerified { get; set; }
 
-        public DateTime EmailVerificationTime { get; set; }
+        public DateTime? EmailVerificationTime { get; set; }
 
         [Required(ErrorMessage = "请填写你的手机号码。")]
         [RegularExpression(@"1[3|5|7|8|][0-9]{9}", ErrorMessage = "请填写正确的手机号码。")]
