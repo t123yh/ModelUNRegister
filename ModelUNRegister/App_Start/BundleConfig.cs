@@ -31,10 +31,10 @@ namespace ModelUNRegister
             "~/Scripts/global.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/ripples.css",
-                      "~/Content/bootstrap-material-design.css"));
+                      //"~/Content/bootstrap.css",
+                      "~/Content/site.css"
+                      //"~/Content/bootstrap-material-design.css"
+           ));
         }
     }
 }
