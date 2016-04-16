@@ -39,6 +39,7 @@ namespace ModelUNRegister.Utilities
         /// </summary>
         /// <param name="body">邮件正文。</param>
         /// <param name="subject">邮件主题。</param>
+        /// <param name="sourceDisplayName">发件人显示名。</param>
         /// <param name="recipient">邮件接收者。</param>
         /// <param name="smtpServer">SMTP 服务器地址。</param>
         /// <param name="smtpPort">SMTP 服务器端口。</param>
