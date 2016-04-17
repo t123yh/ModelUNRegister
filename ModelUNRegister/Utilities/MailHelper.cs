@@ -57,8 +57,8 @@ namespace ModelUNRegister.Utilities
             string password)
         {
             var message = new MailMessage();
-            message.To.Add(new MailAddress(recipient, sourceDisplayName));
-            message.From = new MailAddress(sourceAddress);
+            message.To.Add(new MailAddress(recipient));
+            message.From = new MailAddress(sourceAddress, sourceDisplayName);
             message.Subject = subject;
             message.Body = body;
             message.IsBodyHtml = true;

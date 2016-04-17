@@ -42,7 +42,8 @@ namespace ModelUNRegister.Controllers
                     Id = enrollRequest.RequestId
                 };
                 await MailHelper.SendAsync(MailHelper.RenderPartialToString(this, "EmailVerification", emailModel),
-                   "注册",
+                   "元峰会报名确认",
+                   "元峰会",
                    enrollRequest.Email,
                    AppSettings.SMTPServer,
                    AppSettings.SMTPPort,
