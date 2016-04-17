@@ -2,8 +2,8 @@
 
 @{
     Layout = null;
+    string confirmationUrl = Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme);
 }
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -491,8 +491,8 @@
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;Margin-bottom: 24px;">
                             <div class="btn fullwidth btn--shadow" style="text-align: center;">
-                                <![if !mso]><a style="border-radius: 4px;display: inline-block;font-weight: bold;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #171e24;box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);background-color: #e0dce0;font-family: Ubuntu, sans-serif;font-size: 11px;line-height: 19px;padding: 6px 18px 7px 18px;width: 124px;" href="@Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme)" data-width="124">确认报名，填写报名问题</a><![endif]>
-                                <!--[if mso]><p style="line-height:0;margin:0;"> </p><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="@Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme)" style="width:160px" arcsize="8%" fillcolor="#E0DCE0" stroke="f"><v:shadow on="t" color="#B3B0B3" offset="0,2px"></v:shadow><v:textbox style="mso-fit-shape-to-text:t" inset="0px,5px,0px,4px"><center style="font-size:11px;line-height:19px;color:#171E24;font-family:sans-serif;font-weight:bold;mso-line-height-rule:exactly;mso-text-raise:3px">确认报名，填写报名问题</center></v:textbox></v:roundrect><![endif]-->
+                                <![if !mso]><a style="border-radius: 4px;display: inline-block;font-weight: bold;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #171e24;box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);background-color: #e0dce0;font-family: Ubuntu, sans-serif;font-size: 11px;line-height: 19px;padding: 6px 18px 7px 18px;width: 124px;" href="@confirmationUrl" data-width="124">确认报名，填写报名问题</a><![endif]>
+                                <!--[if mso]><p style="line-height:0;margin:0;"> </p><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="@confirmationUrl" style="width:160px" arcsize="8%" fillcolor="#E0DCE0" stroke="f"><v:shadow on="t" color="#B3B0B3" offset="0,2px"></v:shadow><v:textbox style="mso-fit-shape-to-text:t" inset="0px,5px,0px,4px"><center style="font-size:11px;line-height:19px;color:#171E24;font-family:sans-serif;font-weight:bold;mso-line-height-rule:exactly;mso-text-raise:3px">确认报名，填写报名问题</center></v:textbox></v:roundrect><![endif]-->
                             </div>
                         </div>
 
@@ -509,7 +509,7 @@
                     <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 600px;">
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;Margin-bottom: 24px;">
-                            <p style="Margin-top: 0;Margin-bottom: 0;">如果无法单击上面的按钮，你也可以将以下链接复制至浏览器的地址栏：</p><p style="Margin-top: 20px;Margin-bottom: 0;"><a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #c5dee0;" href="@Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme)">@Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme)</a></p>
+                            <p style="Margin-top: 0;Margin-bottom: 0;">如果无法单击上面的按钮，你也可以将以下链接复制至浏览器的地址栏：</p><p style="Margin-top: 20px;Margin-bottom: 0;"><a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #c5dee0;" href="@confirmationUrl">@confirmationUrl</a></p>
                         </div>
 
                     </td>
