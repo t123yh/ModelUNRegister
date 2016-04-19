@@ -3,6 +3,7 @@
 @{
     Layout = null;
     string confirmationUrl = Url.Action("Confirmation", "Enroll", new { Id = Model.Id }, Request.Url.Scheme);
+    string name = Model.Name;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -436,26 +437,26 @@
 <body class="full-padding" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #171e24;">
     <!--<![endif]-->
     <div class="wrapper" style="background-color: #171e24;">
-        <table style="border-collapse: collapse;table-layout: fixed;color: #fff;font-family: Ubuntu,sans-serif;" align="center">
+        @*<table style="border-collapse: collapse;table-layout: fixed;color: #fff;font-family: Ubuntu,sans-serif;" align="center">
             <tbody>
                 <tr>
                     <td class="preheader__snippet" style="padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
                     <td class="preheader__webversion" style="text-align: right;padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
                 </tr>
             </tbody>
-        </table>
+        </table>*@
 
         <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #212a32;" align="center">
             <tbody>
                 <tr>
                     <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 600px;">
 
-                        <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
-                            <img class="gnd-corner-image gnd-corner-image-center gnd-corner-image-top" style="display: block;border: 0;max-width: 900px;" src="images/DeathtoStock_NotStock6.jpg" alt="" width="600" height="400" />
+                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
+                            <p style="Margin-top: 0;Margin-bottom: 20px;">亲爱的@name同学：</p>
                         </div>
 
-                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
-                            <div style="line-height:14px;font-size:1px"> </div>
+                        <div style="Margin-left: 20px;Margin-right: 20px;">
+                            <div style="line-height:14px;font-size:1px">&nbsp;</div>
                         </div>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
