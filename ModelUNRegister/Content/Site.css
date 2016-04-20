@@ -22,8 +22,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-.right {
-    position: absolute;
-    right: 0px;
-}
