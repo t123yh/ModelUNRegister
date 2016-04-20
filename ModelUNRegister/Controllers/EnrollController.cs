@@ -68,25 +68,19 @@ namespace ModelUNRegister.Controllers
             return View(item);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Confirm")]
         public async Task<ActionResult> ConfirmPost(Guid id)
         {
             //var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
-            var item = new EnrollRequest()
-            {
-                RequestId = id
-            };
+            var item = db.EnrollRequests.First(o => o.RequestId == id);
             item.EmailVerified = true;
             item.EmailVerificationTime = DateTime.Now;
-            db.EnrollRequests.Attach(item);
-            db.Entry(item).Property(o => o.EmailVerificationTime).IsModified
-                = db.Entry(item).Property(o => o.EmailVerified).IsModified
-                = true;
+            db.Entry(item).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return Content("To be implemented.");
         }
 
-        
+
 
         protected override void Dispose(bool disposing)
         {
