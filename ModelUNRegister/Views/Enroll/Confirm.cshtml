@@ -47,6 +47,7 @@
     </table>
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
         <div class="panel-footer">
             <input type="submit" value="确定" class="btn btn-primary btn-raised pull-right" />
             <div class="clearfix"></div>

@@ -68,7 +68,7 @@ namespace ModelUNRegister.Controllers
             return View(item);
         }
 
-        [HttpPost, ActionName("Confirm")]
+        [HttpPost, ActionName("Confirm"), ValidateAntiForgeryToken]
         public async Task<ActionResult> ConfirmPost(Guid id)
         {
             //var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
