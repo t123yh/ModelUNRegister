@@ -32,6 +32,23 @@ namespace ModelUNRegister
         }
     }
 
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        private RoleStore<IdentityRole> roleStore;
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var manager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+            return manager;
+        }
+        public ApplicationRoleManager(RoleStore<IdentityRole> roleStore)
+            : base(roleStore)
+        {
+            // TODO: Complete member initialization
+            this.roleStore = roleStore;
+        }
+    }
+
     // 配置此应用程序中使用的应用程序用户管理器。UserManager 在 ASP.NET Identity 中定义，并由此应用程序使用。
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
