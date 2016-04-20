@@ -62,6 +62,32 @@ namespace ModelUNRegister.Controllers
             return View();
         }
 
+        public async Task<ActionResult> Confirm(Guid id)
+        {
+            var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ConfirmPost(Guid id)
+        {
+            //var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
+            var item = new EnrollRequest()
+            {
+                RequestId = id
+            };
+            item.EmailVerified = true;
+            item.EmailVerificationTime = DateTime.Now;
+            db.EnrollRequests.Attach(item);
+            db.Entry(item).Property(o => o.EmailVerificationTime).IsModified
+                = db.Entry(item).Property(o => o.EmailVerified).IsModified
+                = true;
+            await db.SaveChangesAsync();
+            return Content("To be implemented.");
+        }
+
+        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

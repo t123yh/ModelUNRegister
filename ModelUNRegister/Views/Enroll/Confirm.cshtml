@@ -1,0 +1,55 @@
+﻿@using ModelUNRegister.Models
+@model EnrollRequest
+@{
+    ViewBag.Title = "报名确认";
+}
+
+@functions
+{
+    public HelperResult DisplayData<TValue>(System.Linq.Expressions.Expression<Func<EnrollRequest, TValue>> exp)
+    {
+        return DisplayDataTable(Html.DisplayNameFor(exp), Html.DisplayFor(exp));
+    }
+}
+
+
+@helper DisplayDataTable(MvcHtmlString name, MvcHtmlString data)
+{
+    <tr>
+        <th scope="row">@name</th>
+        <td>@data</td>
+    </tr>
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">报名确认</h3>
+    </div>
+    <div class="panel-body">
+        <p>请核对你的报名信息，并单击“确定”以提交你的报名。如果信息有误，你可以在 30 分钟之后重新提交报名请求。</p>
+    </div>
+    <table class="table">
+        <tbody>
+            @DisplayData(item => item.Name)
+
+            @DisplayData(item => item.Gender)
+
+            @DisplayData(item => item.School)
+
+            @DisplayData(item => item.Grade)
+
+            @DisplayData(item => item.Email)
+
+            @DisplayData(item => item.PhoneNumber)
+
+            @DisplayData(item => item.QQNumber)
+        </tbody>
+    </table>
+    @using (Html.BeginForm())
+    {
+        <div class="panel-footer">
+            <input type="submit" value="确定" class="btn btn-primary btn-raised pull-right" />
+            <div class="clearfix"></div>
+        </div>
+    }
+</div>
