@@ -40,6 +40,30 @@ namespace ModelUNRegister.Utilities
             }
         }
 
+        public static string InitalAdminAccount
+        {
+            get
+            {
+                return Setting<string>("InitalAdminAccount");
+            }
+        }
+
+        public static string InitalAdminPassword
+        {
+            get
+            {
+                return Setting<string>("InitalAdminPassword");
+            }
+        }
+
+        public static string InitalAdminEmail
+        {
+            get
+            {
+                return Setting<string>("InitalAdminEmail");
+            }
+        }
+
         public static bool SMTPSSL
         {
             get
