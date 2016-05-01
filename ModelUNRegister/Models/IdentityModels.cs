@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace ModelUNRegister.Models
 {
@@ -16,6 +17,8 @@ namespace ModelUNRegister.Models
             // 在此处添加自定义用户声明
             return userIdentity;
         }
+
+        public virtual EnrollRequest EnrollRequest { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,6 +32,23 @@ namespace ModelUNRegister.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .HasOptional(u => u.EnrollRequest)
+            //    .WithRequired(req => req.User)
+            //    .Map(conf => conf.MapKey("UserId"))
+            //    .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<EnrollRequest>()
+                .HasRequired(r => r.User)
+                .WithOptional(u => u.EnrollRequest)
+                .Map(conf => conf.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
         }
 
         public DbSet<EnrollRequest> EnrollRequests { get; set; }

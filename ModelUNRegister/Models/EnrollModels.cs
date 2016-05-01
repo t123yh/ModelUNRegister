@@ -33,9 +33,7 @@ namespace ModelUNRegister.Models
         [Key]
         public Guid RequestId { get; set; }
 
-        [Required(ErrorMessage = "请填写你的姓名。")]
-        [Display(Name = "姓名")]
-        public string Name { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required(ErrorMessage = "请填写你所在的学校。")]
         [Display(Name = "所在学校")]
@@ -44,19 +42,8 @@ namespace ModelUNRegister.Models
         //[Required]
         public DateTime SubmissionTime { get; set; }
 
-        [Required(ErrorMessage = "请填写你的电子邮件地址。")]
-        [EmailAddress(ErrorMessage = "电子邮件地址格式不正确。")]
-        [Display(Name = "电子邮件地址")]
-        public string Email { get; set; }
-
-        public bool EmailVerified { get; set; }
-
+        [Display(Name = "Email 验证时间")]
         public DateTime? EmailVerificationTime { get; set; }
-
-        [Required(ErrorMessage = "请填写你的手机号码。")]
-        [RegularExpression(@"1[3|5|7|8|][0-9]{9}", ErrorMessage = "请填写正确的手机号码。")]
-        [Display(Name = "手机号码")]
-        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "请填写你的 QQ 号码。")]
         [RegularExpression(@"^[1-9][0-9]{4,9}$", ErrorMessage = "请填写正确的 QQ 号码。")]
@@ -73,6 +60,6 @@ namespace ModelUNRegister.Models
 
         //[Required]
         public string IPAddress { get; set; }
-
+        
     }
 }
