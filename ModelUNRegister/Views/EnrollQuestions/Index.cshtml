@@ -16,7 +16,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Question)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
             操作
@@ -26,7 +26,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Question)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.ActionLink("编辑", "Edit", new { id=item.QuestionId }) |

@@ -13,7 +13,11 @@ namespace ModelUNRegister.Models
 
         [Required]
         [Display(Name = "问题")]
-        public string Question { get; set; }
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "描述")]
+        public string Description { get; set; }
     }
 
     public class EnrollQuestionAnswer
