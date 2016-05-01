@@ -85,7 +85,7 @@ namespace ModelUNRegister.Controllers
                         Token = (await UserManager.GenerateEmailConfirmationTokenAsync(user.Id))
                     }, Request.Url.Scheme)
                 };
-                await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailVerification", emailModel));
+                await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailConfirmationEmail", emailModel));
 
                 return RedirectToAction("EmailSent");
             }
