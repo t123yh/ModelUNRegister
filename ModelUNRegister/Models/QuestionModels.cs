@@ -9,7 +9,7 @@ namespace ModelUNRegister.Models
     public class EnrollQuestion
     {
         [Key]
-        public Guid QuestionId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "问题")]
@@ -23,7 +23,7 @@ namespace ModelUNRegister.Models
     public class EnrollQuestionAnswer
     {
         [Key]
-        public Guid AnswerId { get; set; }
+        public Guid Id { get; set; }
 
         public virtual EnrollQuestion Question { get; set; }
 
