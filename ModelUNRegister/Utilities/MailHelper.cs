@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ModelUNRegister.Utilities
 {
-    public class MailHelper
+    public class EmailHelper
     {
         /// <summary>
         /// 将指定的视图渲染至字符串内。

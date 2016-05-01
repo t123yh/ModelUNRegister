@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ModelUNRegister.Models;
+using ModelUNRegister.Utilities;
 
 namespace ModelUNRegister
 {
@@ -18,8 +19,17 @@ namespace ModelUNRegister
     {
         public Task SendAsync(IdentityMessage message)
         {
+            return EmailHelper.SendAsync(message.Body, 
+                message.Subject, 
+                "元峰会", 
+                message.Destination, 
+                AppSettings.SMTPServer, 
+                AppSettings.SMTPPort, 
+                AppSettings.SMTPSSL, 
+                AppSettings.MailAccount, 
+                AppSettings.MailPassword);
             // 在此处插入电子邮件服务可发送电子邮件。
-            return Task.FromResult(0);
+            //return Task.FromResult(0);
         }
     }
 
