@@ -1,12 +1,12 @@
 ﻿@using ModelUNRegister.Models
-@model EnrollRequest
+@model EnrollViewModel
 @{
     ViewBag.Title = "报名确认";
 }
 
 @functions
 {
-    public HelperResult DisplayData<TValue>(System.Linq.Expressions.Expression<Func<EnrollRequest, TValue>> exp)
+    public HelperResult DisplayData<TValue>(System.Linq.Expressions.Expression<Func<EnrollViewModel, TValue>> exp)
     {
         return DisplayDataTable(Html.DisplayNameFor(exp), Html.DisplayFor(exp));
     }

@@ -261,7 +261,7 @@
     <Content Include="Scripts\ripples.min.js.map" />
     <Content Include="Scripts\material.min.js.map" />
     <Content Include="Views\Enroll\EmailVerification.cshtml" />
-    <Content Include="Views\Enroll\Confirm.cshtml" />
+    <Content Include="Views\Enroll\EmailConfirmation.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
   </ItemGroup>
   <ItemGroup>

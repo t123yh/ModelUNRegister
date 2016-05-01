@@ -9,12 +9,41 @@ using System.Web.Mvc;
 using ModelUNRegister.Models;
 using ModelUNRegister.Utilities;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ModelUNRegister.Controllers
 {
     public class EnrollController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: Enroll/Create
         public ActionResult Create()
         {
@@ -26,35 +55,42 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,School,Gender,Grade,Email,PhoneNumber,QQNumber")] EnrollRequest enrollRequest)
+        public async Task<ActionResult> Create([Bind(Include = "Name,School,Gender,Grade,Email,PhoneNumber,QQNumber")] EnrollViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                EnrollRequest enrollRequest = new EnrollRequest();
                 enrollRequest.RequestId = Guid.NewGuid();
                 enrollRequest.SubmissionTime = DateTime.Now;
                 enrollRequest.IPAddress = Request.UserHostAddress;
-                enrollRequest.EmailVerified = false;
-                db.EnrollRequests.Add(enrollRequest);
-                db.SaveChanges();
+                enrollRequest.Gender = viewModel.Gender;
+                enrollRequest.Grade = viewModel.Grade;
+                enrollRequest.QQNumber = viewModel.QQNumber;
+                enrollRequest.School = viewModel.School;
+
+                var user = new ApplicationUser();
+                user.UserName = viewModel.Name;
+                user.Email = viewModel.Email;
+                user.PhoneNumber = viewModel.PhoneNumber;
+                user.EnrollRequest = enrollRequest;
+
+                await UserManager.CreateAsync(user);
+
                 EmailVerificationViewModel emailModel = new EmailVerificationViewModel()
                 {
-                    Name = enrollRequest.Name,
-                    Id = enrollRequest.RequestId
+                    Name = user.UserName,
+                    EmailConfirmationLink = Url.Action("EmailConfirmation", "Enroll", new
+                    {
+                        UserId = user.Id,
+                        Token = (await UserManager.GenerateEmailConfirmationTokenAsync(user.Id))
+                    }, Request.Url.Scheme)
                 };
-                await MailHelper.SendAsync(MailHelper.RenderPartialToString(this, "EmailVerification", emailModel),
-                   "元峰会报名确认",
-                   "元峰会",
-                   enrollRequest.Email,
-                   AppSettings.SMTPServer,
-                   AppSettings.SMTPPort,
-                   AppSettings.SMTPSSL,
-                   AppSettings.MailAccount,
-                   AppSettings.MailPassword);
+                await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailVerification", emailModel));
 
                 return RedirectToAction("Success");
             }
 
-            return View(enrollRequest);
+            return View(viewModel);
         }
 
         public ActionResult Success()
@@ -62,21 +98,21 @@ namespace ModelUNRegister.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Confirm(Guid id)
+        public async Task<ActionResult> EmailConfirmation(string userId, string token)
         {
-            var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
-            return View(item);
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            if (user.EmailConfirmed)
+            {
+                await SignInManager.SignInAsync(user, true, true);
+                return Content("You've already signed in.");
+            }
+            return View(EnrollViewModel.CreateFromUser(user));
         }
 
-        [HttpPost, ActionName("Confirm"), ValidateAntiForgeryToken]
-        public async Task<ActionResult> ConfirmPost(Guid id)
+        [HttpPost, ActionName("EmailConfirmation"), ValidateAntiForgeryToken]
+        public async Task<ActionResult> EmailConfirmationPost(string userId, string token)
         {
-            //var item = await db.EnrollRequests.FirstAsync(o => o.RequestId == id);
-            var item = db.EnrollRequests.First(o => o.RequestId == id);
-            item.EmailVerified = true;
-            item.EmailVerificationTime = DateTime.Now;
-            db.Entry(item).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+            await UserManager.ConfirmEmailAsync(userId, token);
             return Content("To be implemented.");
         }
 
