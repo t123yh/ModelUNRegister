@@ -87,7 +87,7 @@ namespace ModelUNRegister.Controllers
                 };
                 await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailVerification", emailModel));
 
-                return RedirectToAction("Success");
+                return RedirectToAction("EmailSent");
             }
 
             return View(viewModel);
