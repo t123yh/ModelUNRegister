@@ -51,12 +51,13 @@ namespace ModelUNRegister.Migrations
                     if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
                 }
             }
-
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
             if (userManager.FindByName(AppSettings.InitalAdminAccount) == null)
             {
-                ApplicationUser newUser = new ApplicationUser() { UserName = AppSettings.InitalAdminAccount, Email = AppSettings.InitalAdminEmail };
+                var newUser = new ApplicationUser() { UserName = AppSettings.InitalAdminAccount, Email = AppSettings.InitalAdminEmail };
+                newUser.EmailConfirmed = true;
+
                 var result = userManager.Create(newUser, AppSettings.InitalAdminPassword);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
                 result = userManager.AddToRole(newUser.Id, adminRoleName);
@@ -65,6 +66,8 @@ namespace ModelUNRegister.Migrations
             else
             {
                 var adminUser = userManager.FindByName(AppSettings.InitalAdminAccount);
+                adminUser.EmailConfirmed = true;
+                userManager.Update(adminUser);
 
                 var result = userManager.RemovePassword(adminUser.Id);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
@@ -78,6 +81,7 @@ namespace ModelUNRegister.Migrations
                     if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
                 }
             }
+            context.SaveChanges();
         }
     }
 }
