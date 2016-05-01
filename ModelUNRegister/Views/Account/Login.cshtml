@@ -31,8 +31,11 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                            
                         </div>
                     </div>
                 </div>
@@ -42,8 +45,8 @@
                     </div>
                 </div>
                 @*<p>
-                    @Html.ActionLink("注册为新用户", "Register")
-                </p>*@
+                        @Html.ActionLink("注册为新用户", "Register")
+                    </p>*@
                 @* 在为密码重置功能启用帐户确认后启用此项
                     <p>
                         @Html.ActionLink("忘记了密码?", "ForgotPassword")
@@ -52,10 +55,10 @@
         </section>
     </div>
     @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 </div>
 
 @section Scripts {
