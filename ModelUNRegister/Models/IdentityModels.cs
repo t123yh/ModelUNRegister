@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 
 namespace ModelUNRegister.Models
 {
@@ -19,6 +20,8 @@ namespace ModelUNRegister.Models
         }
 
         public virtual EnrollRequest EnrollRequest { get; set; }
+
+        public virtual ICollection<EnrollQuestionAnswer> Answers { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -49,8 +52,24 @@ namespace ModelUNRegister.Models
                 .WithOptional(u => u.EnrollRequest)
                 .Map(conf => conf.MapKey("UserId"))
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<EnrollQuestionAnswer>()
+                .HasRequired(r => r.User)
+                .WithMany(u => u.Answers)
+                .Map(conf => conf.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<EnrollQuestionAnswer>()
+                .HasRequired(r => r.Question)
+                .WithMany()
+                .Map(conf => conf.MapKey("QuestionId"))
+                .WillCascadeOnDelete(true);
         }
 
         public DbSet<EnrollRequest> EnrollRequests { get; set; }
+
+        public DbSet<EnrollQuestion> Questions { get; set; }
+
+        public DbSet<EnrollQuestionAnswer> Answers { get; set; }
     }
 }
