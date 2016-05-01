@@ -1,0 +1,31 @@
+﻿@model ModelUNRegister.Models.EnrollQuestion
+
+@{
+    ViewBag.Title = "删除";
+}
+
+<h2>删除报名问题</h2>
+
+<p>删除此问题后，所有用户对于此问题的回答将被清除。</p>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="确定" class="btn btn-warning btn-raised" />
+        </div>
+    }
+    @Html.ActionLink("回到列表", "Index")
+</div>

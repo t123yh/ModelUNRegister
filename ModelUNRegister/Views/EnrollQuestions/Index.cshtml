@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ModelUNRegister.Models.EnrollQuestion>
+
+@{
+    ViewBag.Title = "报名问题";
+}
+
+<h2>报名问题</h2>
+
+<p>
+    下面列出了所有报名问题。
+</p>
+
+<p>
+    @Html.ActionLink("新建", "Create", null, new { @class = "btn btn-primary btn-raised"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Question)
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Question)
+        </td>
+        <td>
+            @Html.ActionLink("编辑", "Edit", new { id=item.QuestionId }) |
+            @Html.ActionLink("删除", "Delete", new { id=item.QuestionId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -267,7 +267,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\EnrollQuestions\Create.cshtml" />
     <Content Include="Views\EnrollQuestions\Delete.cshtml" />
-    <Content Include="Views\EnrollQuestions\Details.cshtml" />
     <Content Include="Views\EnrollQuestions\Edit.cshtml" />
     <Content Include="Views\EnrollQuestions\Index.cshtml" />
   </ItemGroup>
