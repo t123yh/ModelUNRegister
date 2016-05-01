@@ -59,13 +59,24 @@ namespace ModelUNRegister.Migrations
                 ApplicationUser newUser = new ApplicationUser() { UserName = AppSettings.InitalAdminAccount, Email = AppSettings.InitalAdminEmail };
                 var result = userManager.Create(newUser, AppSettings.InitalAdminPassword);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+                result = userManager.AddToRole(newUser.Id, adminRoleName);
+                if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
             }
             else
             {
                 var adminUser = userManager.FindByName(AppSettings.InitalAdminAccount);
-                string resetToken = userManager.GeneratePasswordResetToken(adminUser.Id);
-                var result = userManager.ResetPassword(adminUser.Id, resetToken, AppSettings.InitalAdminPassword);
+
+                var result = userManager.RemovePassword(adminUser.Id);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+
+                result = userManager.AddPassword(adminUser.Id, AppSettings.InitalAdminPassword);
+                if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+
+                if (!userManager.IsInRole(adminUser.Id, adminRoleName))
+                {
+                    result = userManager.AddToRole(adminUser.Id, adminRoleName);
+                    if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+                }
             }
         }
     }
