@@ -12,6 +12,10 @@ namespace ModelUNRegister.Models
         public Guid Id { get; set; }
 
         [Required]
+        [Display(Name = "序号（用于排序，不需连续）")]
+        public int Index { get; set; }
+
+        [Required]
         [Display(Name = "问题")]
         public string Title { get; set; }
 

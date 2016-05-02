@@ -19,13 +19,22 @@ namespace ModelUNRegister.Controllers
         // GET: EnrollQuestions
         public async Task<ActionResult> Index()
         {
-            return View(await db.Questions.ToListAsync());
+            return View(await db.Questions.OrderBy(item => item.Index).ToListAsync());
         }
 
         // GET: EnrollQuestions/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            int index;
+            if(await db.Questions.CountAsync() == 0)
+            {
+                index = 1;
+            }
+            else
+            {
+                index = await db.Questions.MaxAsync(item => item.Index) + 1;
+            }
+            return View(new EnrollQuestion() { Index = index });
         }
 
         // POST: EnrollQuestions/Create
@@ -33,7 +42,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Title,Description")] EnrollQuestion enrollQuestion)
+        public async Task<ActionResult> Create([Bind(Include = "Index,Title,Description")] EnrollQuestion enrollQuestion)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +75,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description")] EnrollQuestion enrollQuestion)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,Index")] EnrollQuestion enrollQuestion)
         {
             if (ModelState.IsValid)
             {
