@@ -20,6 +20,15 @@ namespace ModelUNRegister.Utilities
         RadioButton
     }
 
+    public static class BooleanYesNoExtension
+    {
+        public static MvcHtmlString YesNo(this HtmlHelper htmlHelper, bool yesNo)
+        {
+            var text = yesNo ? "是" : "否";
+            return new MvcHtmlString(text);
+        }
+    }
+
     public static class EnumRadioButtonExtension
     {
         internal static object GetModelStateValue(this HtmlHelper helper, string key, Type destinationType)
