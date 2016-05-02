@@ -33,11 +33,11 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "QuestionId,Title,Description")] EnrollQuestion enrollQuestion)
+        public async Task<ActionResult> Create([Bind(Include = "Title,Description")] EnrollQuestion enrollQuestion)
         {
             if (ModelState.IsValid)
             {
-                enrollQuestion.QuestionId = Guid.NewGuid();
+                enrollQuestion.Id = Guid.NewGuid();
                 db.Questions.Add(enrollQuestion);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -66,7 +66,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "QuestionId,Title,Description")] EnrollQuestion enrollQuestion)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description")] EnrollQuestion enrollQuestion)
         {
             if (ModelState.IsValid)
             {
