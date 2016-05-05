@@ -1,0 +1,36 @@
+﻿@using ModelUNRegister.Models
+@model AnswersViewModel
+
+@{
+    ViewBag.Title = "回答问题";
+}
+
+<h2>回答问题</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="answerFormSection">
+            @using (Html.BeginForm())
+            {
+                for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <div class="col-md-10 col-md-offset-2">
+                        <h3>@Html.DisplayFor(m => m.Answers[i].Question.Title)</h3>
+                        <p>@Html.DisplayFor(m => m.Answers[i].Question.Description)</p>
+                    </div>
+
+                    @Html.HiddenFor(m => m.Answers[i].Question.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Answers[i].AnswerContent, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Answers[i].AnswerContent, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Answers[i].AnswerContent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+                <input type="submit" value="提交" class="btn btn-primary btn-raised" />
+            }
+        </section>
+
+
+    </div>
+</div>
