@@ -46,7 +46,7 @@ namespace ModelUNRegister.Controllers
                   {
                       AnswerContent = answer?.AnswerContent,
                       AnswerId = answer?.Id,
-                      Question = question,
+                      Question = QuestionViewModel.CreateFromQuestion(question)
                   };
               });
 
