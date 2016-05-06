@@ -22,6 +22,8 @@ namespace ModelUNRegister.Models
         public virtual EnrollRequest EnrollRequest { get; set; }
 
         public virtual ICollection<EnrollQuestionAnswer> Answers { get; set; }
+
+        public string ActualName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

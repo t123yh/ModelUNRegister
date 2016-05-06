@@ -12,7 +12,7 @@ namespace ModelUNRegister.Models
         {
             EnrollViewModel model = new EnrollViewModel()
             {
-                Name = user.UserName,
+                Name = user.ActualName,
                 School = user.EnrollRequest.School,
                 SubmissionTime = user.EnrollRequest.SubmissionTime,
                 Email = user.Email,

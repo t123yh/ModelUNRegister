@@ -69,7 +69,8 @@ namespace ModelUNRegister.Controllers
                 enrollRequest.School = viewModel.School;
 
                 var user = new ApplicationUser();
-                user.UserName = viewModel.Name;
+                user.UserName = user.Id;
+                user.ActualName = viewModel.Name;
                 user.Email = viewModel.Email;
                 user.PhoneNumber = viewModel.PhoneNumber;
                 user.EnrollRequest = enrollRequest;
