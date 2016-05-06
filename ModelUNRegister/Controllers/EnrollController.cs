@@ -79,7 +79,7 @@ namespace ModelUNRegister.Controllers
 
                 EmailVerificationViewModel emailModel = new EmailVerificationViewModel()
                 {
-                    Name = user.UserName,
+                    Name = user.ActualName,
                     EmailConfirmationLink = Url.Action("EmailConfirmation", "Enroll", new
                     {
                         UserId = user.Id,
