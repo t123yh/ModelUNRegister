@@ -20,5 +20,13 @@ namespace ModelUNRegister.Models
     public class AnswersViewModel
     {
         public List<QuestionAnswerViewModel> Answers { get; set; }
+
+        public bool IsFullyAnswered
+        {
+            get
+            {
+                return Answers.All(ans => !string.IsNullOrWhiteSpace(ans.AnswerContent));
+            }
+        }
     }
 }
