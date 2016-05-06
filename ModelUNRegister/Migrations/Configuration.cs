@@ -18,6 +18,7 @@ namespace ModelUNRegister.Migrations
         }
 
         const string adminRoleName = "Administrators";
+        const string adminActualName = "系统管理员";
         const string userRoleName = "Users";
 
         dynamic originRoles = new[] {
@@ -27,18 +28,7 @@ namespace ModelUNRegister.Migrations
 
         protected override void Seed(ModelUNRegister.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            IdentityResult result;
 
             var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context));
 
@@ -47,39 +37,35 @@ namespace ModelUNRegister.Migrations
                 if (!roleManager.RoleExists((string)item.Name))
                 {
                     IdentityRole administrators = new IdentityRole(item.Name);
-                    var result = roleManager.Create(administrators);
+                    result = roleManager.Create(administrators);
                     if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
                 }
             }
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
-            if (userManager.FindByName(AppSettings.InitalAdminAccount) == null)
+            ApplicationUser adminUser;
+            if ((adminUser = userManager.FindByName(AppSettings.InitalAdminAccount)) == null)
             {
-                var newUser = new ApplicationUser() { UserName = AppSettings.InitalAdminAccount, Email = AppSettings.InitalAdminEmail };
-                newUser.EmailConfirmed = true;
+                adminUser = new ApplicationUser() { UserName = AppSettings.InitalAdminAccount, Email = AppSettings.InitalAdminEmail };
 
-                var result = userManager.Create(newUser, AppSettings.InitalAdminPassword);
-                if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
-                result = userManager.AddToRole(newUser.Id, adminRoleName);
+                result = userManager.Create(adminUser, AppSettings.InitalAdminPassword);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
             }
-            else
+
+            adminUser.EmailConfirmed = true;
+            adminUser.ActualName = adminActualName;
+            userManager.Update(adminUser);
+
+            result = userManager.RemovePassword(adminUser.Id);
+            if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+
+            result = userManager.AddPassword(adminUser.Id, AppSettings.InitalAdminPassword);
+            if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
+
+            if (!userManager.IsInRole(adminUser.Id, adminRoleName))
             {
-                var adminUser = userManager.FindByName(AppSettings.InitalAdminAccount);
-                adminUser.EmailConfirmed = true;
-                userManager.Update(adminUser);
-
-                var result = userManager.RemovePassword(adminUser.Id);
+                result = userManager.AddToRole(adminUser.Id, adminRoleName);
                 if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
-
-                result = userManager.AddPassword(adminUser.Id, AppSettings.InitalAdminPassword);
-                if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
-
-                if (!userManager.IsInRole(adminUser.Id, adminRoleName))
-                {
-                    result = userManager.AddToRole(adminUser.Id, adminRoleName);
-                    if (!result.Succeeded) throw new InvalidOperationException(string.Concat(result.Errors));
-                }
             }
             context.SaveChanges();
         }
