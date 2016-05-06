@@ -6,6 +6,15 @@
 }
 
 <h2>回答问题</h2>
+
+@if (!Model.IsFullyAnswered)
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 请填写所有报名问题。
+    </div>
+}
+
 <div class="row">
     <div class="col-md-8">
         <section id="answerFormSection">
