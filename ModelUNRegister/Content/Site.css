@@ -18,9 +18,7 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 
-.input-limited
-input,
-select,
-textarea {
+textarea.input-limited input,
+select {
     max-width: 280px;
 }
