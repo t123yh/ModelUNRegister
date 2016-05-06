@@ -54,5 +54,49 @@ namespace ModelUNRegister.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Answers(AnswersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                foreach (QuestionAnswerViewModel qa in model.Answers)
+                {
+                    EnrollQuestionAnswer answer = db.Answers.Where(ans => ans.Question.Id == qa.Question.Id && ans.User.Id == user.Id).FirstOrDefault();
+                    // 如果当前问题已经有了回答
+                    if (answer != null)
+                    {
+                        // 如果有回答就修改，如果没有就删掉。
+                        if (!string.IsNullOrWhiteSpace(qa.AnswerContent))
+                        {
+                            answer.AnswerContent = qa.AnswerContent;
+                        }
+                        else
+                        {
+                            db.Answers.Remove(answer);
+                        }
+                    }
+                    else
+                    {
+                        // 如果回答不为空
+                        if (!string.IsNullOrWhiteSpace(qa.AnswerContent))
+                        {
+                            answer = new EnrollQuestionAnswer();
+                            answer.Id = Guid.NewGuid();
+                            answer.AnswerContent = qa.AnswerContent;
+                            answer.Question = db.Questions.Where(d => d.Id == qa.Question.Id).First();
+                            answer.User = db.Users.Where(u => u.Id == user.Id).First();
+                            db.Answers.Add(answer);
+                        }
+                    }
+                }
+                await db.SaveChangesAsync();
+                return Content("成功");
+            }
+            else
+            {
+                return Content("模型不正确。");
+            }
+        }
     }
 }
