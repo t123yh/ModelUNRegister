@@ -19,6 +19,11 @@
                     </div>
 
                     @Html.HiddenFor(m => m.Answers[i].Question.Id)
+                    @if (Model.Answers[i].AnswerId.HasValue)
+                    {
+                        @Html.HiddenFor(m => m.Answers[i].AnswerId)
+                    }
+
                     <div class="form-group">
                         @Html.LabelFor(m => m.Answers[i].AnswerContent, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
