@@ -39,16 +39,16 @@ namespace ModelUNRegister.Controllers
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            var answers = db.Questions.ToArray().Select(question =>
-            {
-                EnrollQuestionAnswer answer = db.Answers.Where(ans => ans.User.Id == user.Id && ans.Question.Id == question.Id).FirstOrDefault();
-                return new QuestionAnswerViewModel()
-                {
-                    AnswerContent = answer?.AnswerContent,
-                    AnswerId = answer?.Id,
-                    Question = question,
-                };
-            });
+            var answers = db.Questions.OrderBy(q => q.Index).ToArray().Select(question =>
+              {
+                  EnrollQuestionAnswer answer = db.Answers.Where(ans => ans.User.Id == user.Id && ans.Question.Id == question.Id).FirstOrDefault();
+                  return new QuestionAnswerViewModel()
+                  {
+                      AnswerContent = answer?.AnswerContent,
+                      AnswerId = answer?.Id,
+                      Question = question,
+                  };
+              });
 
             AnswersViewModel model = new AnswersViewModel() { Answers = answers.ToList() };
 
