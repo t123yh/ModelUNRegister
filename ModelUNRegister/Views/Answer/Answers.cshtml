@@ -19,7 +19,8 @@
                     </div>
 
                     @Html.HiddenFor(m => m.Answers[i].Question.Id)
-                    @if (Model.Answers[i].AnswerId.HasValue)
+
+                    if (Model.Answers[i].AnswerId.HasValue)
                     {
                         @Html.HiddenFor(m => m.Answers[i].AnswerId)
                     }
