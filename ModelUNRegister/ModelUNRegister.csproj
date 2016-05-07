@@ -288,6 +288,7 @@
     <Content Include="Views\EnrollInformation\Answers.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
     <Content Include="Views\EnrollInformation\Index.cshtml" />
+    <Content Include="Views\EnrollInformation\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />

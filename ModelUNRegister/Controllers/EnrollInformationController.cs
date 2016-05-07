@@ -40,6 +40,54 @@ namespace ModelUNRegister.Controllers
             return View();
         }
 
+        public async Task<ActionResult> Edit()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+            if (user.EnrollRequest != null)
+            {
+                return View(EnrollViewModel.CreateFromUser(user));
+            }
+            else
+            {
+                return View("../Shared/Message", new MessageViewModel()
+                {
+                    Title = "错误",
+                    Message = "当前用户没有报名信息。",
+                    Theme = BootstrapTheme.Warning
+                });
+            }
+        }
+
+        public async Task<ActionResult> Edit(EnrollViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+                user.ActualName = model.Name;
+                user.EnrollRequest.Gender = model.Gender;
+                user.EnrollRequest.School = model.School;
+                user.EnrollRequest.Grade = model.Grade;
+                user.PhoneNumber = model.PhoneNumber;
+                user.EnrollRequest.QQNumber = model.QQNumber;
+
+                await UserManager.UpdateAsync(user);
+
+                return Redirect(Url.Action("Index"));
+            }
+            else
+            {
+                return View("../Shared/Message", new MessageViewModel()
+                {
+                    Title = "错误",
+                    Message = "模型不正确。",
+                    Theme = BootstrapTheme.Danger
+                });
+            }
+        }
+
+
         public async Task<ActionResult> Answers()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());

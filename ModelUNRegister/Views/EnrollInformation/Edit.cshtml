@@ -1,0 +1,83 @@
+﻿@using ModelUNRegister.Models
+@using ModelUNRegister.Utilities
+
+@model EnrollViewModel
+@{
+    ViewBag.Title = "编辑报名信息";
+}
+
+<h2>编辑报名信息</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="editFormSection">
+            @using (Html.BeginForm("Edit", "EnrollInformation", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "editForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Gender, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumRadioButtonFor(m => m.Gender, new { @class = "radio-primary" })
+                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.School, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.School, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.School, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Grade, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumRadioButtonFor(m => m.Grade, new { @class = "radio-primary" })
+                        @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <p class="form-control-static">@Html.DisplayFor(m => m.Email)</p>
+                        @*让验证逻辑不要认为模型不正确。当然，在最终模型中不会绑定此项。*@
+                        @Html.HiddenFor(m => m.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.QQNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.QQNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.QQNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="确定" class="btn btn-primary btn-raised" />
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>

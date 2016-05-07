@@ -181,6 +181,10 @@ namespace ModelUNRegister.Controllers
         }
 
 
+        public enum EnrollInformationMessageId
+        {
+            
+        }
 
         protected override void Dispose(bool disposing)
         {
