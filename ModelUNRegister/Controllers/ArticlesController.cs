@@ -11,6 +11,7 @@ using ModelUNRegister.Models;
 
 namespace ModelUNRegister.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class ArticlesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +37,7 @@ namespace ModelUNRegister.Controllers
             return View(article);
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> Details(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
