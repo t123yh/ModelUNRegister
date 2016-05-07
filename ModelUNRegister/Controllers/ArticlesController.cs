@@ -75,7 +75,7 @@ namespace ModelUNRegister.Controllers
             Article article = db.Articles.Where(a => a.Keyword == id).FirstOrDefault();
             if (article == null)
             {
-                return Content($"关键字 {HttpUtility.HtmlEncode(id)} 不存在。请添加相应的检索关键字对应的内容。");
+                return Content($"关键字 {HttpUtility.HtmlEncode(id)} 不存在。请以管理员身份登录，在 系统管理 - 文章管理 中新建文章，并将其关键字设置为相应的检索关键字（\"{HttpUtility.HtmlEncode(id)}\"）。");
             }
             return Content(article.Content);
         }
