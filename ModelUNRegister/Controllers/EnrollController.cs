@@ -156,7 +156,7 @@ namespace ModelUNRegister.Controllers
                 if (user.EmailConfirmed)
                 {
                     await SignInManager.SignInAsync(user, true, true);
-                    return Content("You've already signed in.");
+                    return RedirectToAction("Index", "EnrollInformation");
                 }
                 return View(EnrollViewModel.CreateFromUser(user));
             }
@@ -172,7 +172,7 @@ namespace ModelUNRegister.Controllers
             if (!Request.IsAuthenticated)
             {
                 await UserManager.ConfirmEmailAsync(userId, token);
-                return Content("To be implemented.");
+                return RedirectToAction("Answers", "EnrollInformation");
             }
             else
             {
@@ -183,7 +183,7 @@ namespace ModelUNRegister.Controllers
 
         public enum EnrollInformationMessageId
         {
-            
+
         }
 
         protected override void Dispose(bool disposing)
