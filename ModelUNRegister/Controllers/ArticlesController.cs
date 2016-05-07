@@ -34,18 +34,32 @@ namespace ModelUNRegister.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> Show(string keyword)
+        public async Task<ActionResult> Show(string id)
         {
-            if (string.IsNullOrWhiteSpace(keyword))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = await db.Articles.Where(a => a.Keyword == keyword).FirstOrDefaultAsync();
+            Article article = await db.Articles.Where(a => a.Keyword == id).FirstOrDefaultAsync();
             if (article == null)
             {
                 return HttpNotFound();
             }
             return View("Details", article);
+        }
+
+        public ActionResult ContentPartial(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Article article = db.Articles.Where(a => a.Keyword == id).FirstOrDefault();
+            if (article == null)
+            {
+                return Content($"关键字 {HttpUtility.HtmlEncode(id)} 不存在。请添加相应的检索关键字对应的内容。");
+            }
+            return Content(article.Content);
         }
 
         // GET: Articles/Create
