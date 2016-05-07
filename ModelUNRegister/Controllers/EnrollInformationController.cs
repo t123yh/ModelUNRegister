@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using ModelUNRegister.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -29,9 +30,13 @@ namespace ModelUNRegister.Controllers
             }
         }
 
-        // GET: Answer
-        public ActionResult Index()
+        // GET: Index
+        public async Task<ActionResult> Index()
         {
+            int questionCount = await db.Questions.CountAsync();
+            string uid = User.Identity.GetUserId();
+            int answeredCount = await db.Questions.Where(question => db.Answers.Count(ans => ans.User.Id == uid && ans.Question.Id == question.Id) > 0).CountAsync();
+            ViewBag.UnansweredQuestion = questionCount - answeredCount;
             return View();
         }
 

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "报名信息管理";
+}
+
+<h2>报名信息管理</h2>
+
+<ul class="nav nav-pills">
+    <li class="active">
+        <a href="@Url.Action("Answers")">
+            报名问题
+            @if (ViewBag.UnansweredQuestion > 0)
+            {
+                <span class="badge">@ViewBag.UnansweredQuestion</span>
+            }
+        </a>
+    </li>
+    <li>
+        <a href="#">修改报名信息</a>
+    </li>
+</ul>
