@@ -439,13 +439,13 @@
     <!--<![endif]-->
     <div class="wrapper" style="background-color: #171e24;">
         @*<table style="border-collapse: collapse;table-layout: fixed;color: #fff;font-family: Ubuntu,sans-serif;" align="center">
-            <tbody>
-                <tr>
-                    <td class="preheader__snippet" style="padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
-                    <td class="preheader__webversion" style="text-align: right;padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
-                </tr>
-            </tbody>
-        </table>*@
+                <tbody>
+                    <tr>
+                        <td class="preheader__snippet" style="padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
+                        <td class="preheader__webversion" style="text-align: right;padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
+                    </tr>
+                </tbody>
+            </table>*@
 
         <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #212a32;" align="center">
             <tbody>
@@ -475,19 +475,22 @@
             <tbody>
                 <tr>
                     <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 400px;">
-
-                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
-                            <p style="Margin-top: 0;Margin-bottom: 20px;">问题 1</p>
-                        </div>
-
-                        <div style="Margin-left: 20px;Margin-right: 20px;">
-                            <p style="Margin-top: 0;Margin-bottom: 20px;">问题 2</p>
-                        </div>
-
-                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
-                            <p style="Margin-top: 0;Margin-bottom: 0;">问题 3</p>
-                        </div>
-
+                        @for (int i = 0; i < Model.Questions.Count; i++)
+                        {
+                            string extraStyle = "";
+                            if(i == 0)
+                            {
+                                extraStyle += "Margin-top: 24px;";
+                            }
+                            if( i == Model.Questions.Count - 1)
+                            {
+                                extraStyle += "Margin-bottom: 24px;";
+                            }
+                            <div style="Margin-left: 20px;Margin-right: 20px;@(extraStyle)">
+                                <h5 style="Margin-top: 0;Margin-bottom: 20px;">@(Model.Questions[i].Title)</h5>
+                                <p style="Margin-top: 0;Margin-bottom: 20px;">@(Model.Questions[i].Description)</p>
+                            </div>
+                        }
                     </td>
                     <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 200px;">
 
@@ -541,7 +544,7 @@
                                             <div>此为系统自动邮件，请勿回复。</div>
                                         </div>
                                         <div class="footer__permission" style="Margin-top: 18px;">
-                                            <div>若有任何疑问，请联系 t123yh@outlook.com 。</div>
+                                            <div>若有任何疑问，请联系<a href="mailto:t123yh@outlook.com">管理员</a>。</div>
                                         </div>
                                     </td>
                                 </tr>

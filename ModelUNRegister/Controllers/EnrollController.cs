@@ -84,7 +84,8 @@ namespace ModelUNRegister.Controllers
                     {
                         UserId = user.Id,
                         Token = (await UserManager.GenerateEmailConfirmationTokenAsync(user.Id))
-                    }, Request.Url.Scheme)
+                    }, Request.Url.Scheme),
+                    Questions = db.Questions.OrderBy(q => q.Index).ToList()
                 };
                 await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailConfirmationEmail", emailModel));
 

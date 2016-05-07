@@ -10,5 +10,7 @@ namespace ModelUNRegister.Models
         public string Name { get; set; }
 
         public string EmailConfirmationLink { get; set; }
+
+        public List<EnrollQuestion> Questions { get; set; }
     }
 }
