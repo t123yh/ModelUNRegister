@@ -181,7 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\EnrollInformationController.cs" />
     <Compile Include="Controllers\EnrollController.cs" />
     <Compile Include="Controllers\EnrollQuestionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -286,7 +286,7 @@
     <Content Include="Views\EnrollQuestions\Delete.cshtml" />
     <Content Include="Views\EnrollQuestions\Edit.cshtml" />
     <Content Include="Views\EnrollQuestions\Index.cshtml" />
-    <Content Include="Views\Answer\Answers.cshtml" />
+    <Content Include="Views\EnrollInformation\Answers.cshtml" />
     <Content Include="Views\Shared\Message.cshtml" />
   </ItemGroup>
   <ItemGroup>

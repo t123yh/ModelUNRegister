@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace ModelUNRegister.Controllers
 {
     [Authorize]
-    public class AnswerController : Controller
+    public class EnrollInformationController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
