@@ -122,7 +122,12 @@ namespace ModelUNRegister.Controllers
                 };
                 await UserManager.SendEmailAsync(user.Id, "元峰会 - 报名确认", EmailHelper.RenderPartialToString(this, "EmailConfirmationEmail", emailModel));
 
-                return RedirectToAction("EmailSent");
+                return View("../Shared/Message", new MessageViewModel()
+                {
+                    Title = "已发送验证邮件",
+                    Message = $"验证邮件已发至你的电子邮箱，请按邮件内的提示操作。",
+                    Theme = BootstrapTheme.Success
+                });
             }
 
             return View(viewModel);
