@@ -1,9 +1,12 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "错误";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">出错啦！</h1>
+<h2 class="text-danger">请联系开发者：<a href="mailto:t123yh@outlook.com">t123yh@outlook.com</a></h2>
 
+<p>如果你足够强大，你也可以自行分析下列错误信息：</p>
+<p>错误：@Model.Exception.Message</p>
+<p>你还可以在<a href="https://github.com/t123yh/ModelUNRegister">这里</a>可以找到网站源码，自己玩玩。</p>
