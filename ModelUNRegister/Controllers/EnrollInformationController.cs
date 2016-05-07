@@ -60,6 +60,7 @@ namespace ModelUNRegister.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EnrollViewModel model)
         {
             if (ModelState.IsValid)
@@ -109,6 +110,7 @@ namespace ModelUNRegister.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Answers(AnswersViewModel model)
         {
             if (ModelState.IsValid)
