@@ -1,42 +1,13 @@
 ﻿@model ModelUNRegister.Models.Article
 
-@{
-    ViewBag.Title = "详情";
+@{ 
+    ViewBag.Title = Model.Title;
 }
 
-<h2>详情</h2>
-
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Keyword)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Keyword)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-    </dl>
+<div class="page-header">
+    <h1>@Model.Title</h1>
 </div>
+
 <p>
-    @Html.ActionLink("编辑", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("回到列表", "Index")
+    @Model.Content
 </p>

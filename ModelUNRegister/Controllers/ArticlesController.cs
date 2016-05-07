@@ -36,6 +36,20 @@ namespace ModelUNRegister.Controllers
             return View(article);
         }
 
+        public async Task<ActionResult> Details(string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Article article = await db.Articles.Where(a => a.Keyword == keyword).FirstOrDefaultAsync();
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            return View(article);
+        }
+
         // GET: Articles/Create
         public ActionResult Create()
         {
