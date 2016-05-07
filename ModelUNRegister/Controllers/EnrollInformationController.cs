@@ -59,6 +59,7 @@ namespace ModelUNRegister.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<ActionResult> Edit(EnrollViewModel model)
         {
             if (ModelState.IsValid)
