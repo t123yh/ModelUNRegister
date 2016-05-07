@@ -3,12 +3,14 @@ using Microsoft.AspNet.Identity.Owin;
 using ModelUNRegister.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ModelUNRegister.Utilities;
 
 namespace ModelUNRegister.Controllers
 {
@@ -34,6 +36,12 @@ namespace ModelUNRegister.Controllers
         // GET: Index
         public async Task<ActionResult> Index()
         {
+            if (Session["MessageId"] != null)
+            {
+                ViewBag.StatusMessage = ((MessageId)Session["MessageId"]).GetDisplayDescription();
+                Session["MessageId"] = null;
+            }
+
             int questionCount = await db.Questions.CountAsync();
             string uid = User.Identity.GetUserId();
             int answeredCount = await db.Questions.Where(question => db.Answers.Count(ans => ans.User.Id == uid && ans.Question.Id == question.Id) > 0).CountAsync();
@@ -77,6 +85,7 @@ namespace ModelUNRegister.Controllers
 
                 await UserManager.UpdateAsync(user);
 
+                Session["MessageId"] = MessageId.EditInformationSuccess;
                 return RedirectToAction("Index");
             }
             else
@@ -143,6 +152,7 @@ namespace ModelUNRegister.Controllers
                     }
                 }
                 await db.SaveChangesAsync();
+                Session["MessageId"] = MessageId.EditAnswerSuccess;
                 return RedirectToAction("Index");
             }
             else
@@ -161,6 +171,16 @@ namespace ModelUNRegister.Controllers
                 }
             }
             base.Dispose(disposing);
+        }
+
+        public enum MessageId
+        {
+            [Display(Description = "报名成功。请等候通知。")]
+            EnrollSuccess,
+            [Display(Description = "报名信息修改成功。")]
+            EditInformationSuccess,
+            [Display(Description = "报名回答编辑成功。")]
+            EditAnswerSuccess
         }
     }
 }

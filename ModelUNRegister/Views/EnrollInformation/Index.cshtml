@@ -3,6 +3,14 @@
     ViewBag.Title = "报名信息管理";
 }
 
+@if (ViewBag.StatusMessage != null)
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> @ViewBag.StatusMessage
+    </div>
+}
+
 <h2>报名信息管理</h2>
 
 <ul class="nav nav-pills">
