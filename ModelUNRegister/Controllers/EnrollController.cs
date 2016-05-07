@@ -138,22 +138,46 @@ namespace ModelUNRegister.Controllers
             return View();
         }
 
+        public ActionResult CreateLoginedMessage()
+        {
+            return View("../Shared/Message", new MessageViewModel()
+            {
+                Title = "您已经登录，不能再验证邮件。",
+                Message = $"请先退出当前账号。",
+                Theme = BootstrapTheme.Success
+            });
+        }
+
         public async Task<ActionResult> EmailConfirmation(string userId, string token)
         {
-            ApplicationUser user = await UserManager.FindByIdAsync(userId);
-            if (user.EmailConfirmed)
+            if (!Request.IsAuthenticated)
             {
-                await SignInManager.SignInAsync(user, true, true);
-                return Content("You've already signed in.");
+                ApplicationUser user = await UserManager.FindByIdAsync(userId);
+                if (user.EmailConfirmed)
+                {
+                    await SignInManager.SignInAsync(user, true, true);
+                    return Content("You've already signed in.");
+                }
+                return View(EnrollViewModel.CreateFromUser(user));
             }
-            return View(EnrollViewModel.CreateFromUser(user));
+            else
+            {
+                return CreateLoginedMessage();
+            }
         }
 
         [HttpPost, ActionName("EmailConfirmation"), ValidateAntiForgeryToken]
         public async Task<ActionResult> EmailConfirmationPost(string userId, string token)
         {
-            await UserManager.ConfirmEmailAsync(userId, token);
-            return Content("To be implemented.");
+            if (!Request.IsAuthenticated)
+            {
+                await UserManager.ConfirmEmailAsync(userId, token);
+                return Content("To be implemented.");
+            }
+            else
+            {
+                return CreateLoginedMessage();
+            }
         }
 
 
