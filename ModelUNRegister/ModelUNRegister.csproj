@@ -206,7 +206,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
-    <Compile Include="Utilities\DisplayNameHelper.cs" />
+    <Compile Include="Utilities\DisplayHelper.cs" />
     <Compile Include="Utilities\HtmlHelper.cs" />
     <Compile Include="Utilities\IdentityExtensions.cs" />
     <Compile Include="Utilities\MailHelper.cs" />

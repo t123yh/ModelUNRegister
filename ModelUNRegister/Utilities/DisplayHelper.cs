@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ModelUNRegister.Utilities
 {
-    public static class DisplayNameHelper
+    public static class DisplayHelper
     {
-        public static string GetDisplayName(this Enum value)
+        public static DisplayAttribute GetDisplayAttribute(this Enum value)
         {
             // From http://www.csharpdeveloping.net/Snippet/how_to_get_display_name_displayattribute_from_enum_value
 
@@ -22,8 +22,17 @@ namespace ModelUNRegister.Utilities
             var attributes = member.GetCustomAttributes(typeof(DisplayAttribute), false);
             if (attributes.Length == 0) throw new ArgumentException(String.Format("'{0}.{1}' doesn't have DisplayAttribute", type.Name, value));
 
-            var attribute = (DisplayAttribute)attributes[0];
-            return attribute.GetName();
+            return (DisplayAttribute)attributes[0];
+        }
+
+        public static string GetDisplayName(this Enum value)
+        {
+            return GetDisplayAttribute(value).GetName();
+        }
+
+        public static string GetDisplayDescription(this Enum value)
+        {
+            return GetDisplayAttribute(value).GetDescription();
         }
     }
 }
