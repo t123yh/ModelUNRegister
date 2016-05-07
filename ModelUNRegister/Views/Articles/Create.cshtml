@@ -4,7 +4,9 @@
     ViewBag.Title = "创建";
 }
 
-<h2>创建</h2>
+<script src='//cdn.bootcss.com/tinymce/4.3.7/tinymce.min.js'></script>
+
+<h2>创建文章</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -49,3 +51,13 @@
 <div>
     @Html.ActionLink("返回列表", "Index")
 </div>
+
+@section scripts {
+    <script>
+        tinymce.init({
+            selector: '#Content',
+            plugins: "image",
+            height: 500
+        });
+    </script>
+}

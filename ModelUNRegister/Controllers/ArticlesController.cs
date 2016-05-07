@@ -23,12 +23,8 @@ namespace ModelUNRegister.Controllers
         }
 
         // GET: Articles/Details/5
-        public async Task<ActionResult> Details(Guid? id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Article article = await db.Articles.FindAsync(id);
             if (article == null)
             {
@@ -38,7 +34,7 @@ namespace ModelUNRegister.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<ActionResult> Details(string keyword)
+        public async Task<ActionResult> Show(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
@@ -49,7 +45,7 @@ namespace ModelUNRegister.Controllers
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View("Details", article);
         }
 
         // GET: Articles/Create
