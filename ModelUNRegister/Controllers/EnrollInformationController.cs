@@ -96,11 +96,16 @@ namespace ModelUNRegister.Controllers
                     }
                 }
                 await db.SaveChangesAsync();
-                return Content("成功");
+                return Redirect(Url.Action("Index"));
             }
             else
             {
-                return Content("模型不正确。");
+                return View("../Shared/Message", new MessageViewModel()
+                {
+                    Title = "错误",
+                    Message = "模型不正确。",
+                    Theme = BootstrapTheme.Danger
+                });
             }
         }
     }
