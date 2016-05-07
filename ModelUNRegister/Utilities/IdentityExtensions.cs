@@ -14,5 +14,11 @@ namespace ModelUNRegister.Utilities
             var claim = ((ClaimsIdentity)identity).FindFirst("ActualName");
             return (claim != null) ? claim.Value : string.Empty;
         }
+
+        public static bool IsAdministrator(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("IsAdministrator");
+            return (claim != null) ? (claim.Value == "true") : false;
+        }
     }
 }

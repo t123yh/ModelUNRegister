@@ -17,6 +17,7 @@ namespace ModelUNRegister.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // 在此处添加自定义用户声明
             userIdentity.AddClaim(new Claim("ActualName", this.ActualName));
+            userIdentity.AddClaim(new Claim("IsAdministrator", manager.IsInRole(this.Id, "Administrators").ToString()));
             return userIdentity;
         }
 
