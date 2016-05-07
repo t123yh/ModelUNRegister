@@ -75,5 +75,7 @@ namespace ModelUNRegister.Models
         public DbSet<EnrollQuestion> Questions { get; set; }
 
         public DbSet<EnrollQuestionAnswer> Answers { get; set; }
+
+        public System.Data.Entity.DbSet<ModelUNRegister.Models.Article> Articles { get; set; }
     }
 }

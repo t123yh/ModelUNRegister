@@ -181,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\EnrollInformationController.cs" />
     <Compile Include="Controllers\EnrollController.cs" />
     <Compile Include="Controllers\EnrollQuestionsController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AnswerViewModel.cs" />
+    <Compile Include="Models\ArticleModels.cs" />
     <Compile Include="Models\EmailVerificationViewModels.cs" />
     <Compile Include="Models\EnrollViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -274,6 +276,11 @@
     <Content Include="Views\EnrollInformation\Index.cshtml" />
     <Content Include="Views\EnrollInformation\Edit.cshtml" />
     <Content Include="Views\SystemManagement\Index.cshtml" />
+    <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Articles\Details.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />
