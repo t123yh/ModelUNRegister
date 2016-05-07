@@ -172,7 +172,13 @@ namespace ModelUNRegister.Controllers
             if (!Request.IsAuthenticated)
             {
                 await UserManager.ConfirmEmailAsync(userId, token);
-                await SignInManager.SignInAsync(await UserManager.FindByIdAsync(userId), true, true);
+
+                var user = await UserManager.FindByIdAsync(userId);
+                user.EnrollRequest.EmailVerificationTime = DateTime.Now;
+                await UserManager.UpdateAsync(user);
+
+                await SignInManager.SignInAsync(user, true, true);
+
                 return RedirectToAction("Answers", "EnrollInformation");
             }
             else
