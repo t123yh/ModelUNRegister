@@ -6,6 +6,7 @@
     //string confirmationUrl = Url.Action("Confirm", "Enroll", new { Id = Model.Id }, Request.Url.Scheme);
     string name = Model.Name;
 }
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,10 +16,6 @@
     <meta name="viewport" content="width=device-width" />
     <title> </title>
     <style type="text/css">
-        .wrapper a:hover {
-            text-decoration: none !important;
-        }
-
         .btn a:hover,
         .footer__links a:hover {
             opacity: 0.8;
@@ -183,11 +180,6 @@
                 text-align: center !important;
             }
 
-            .header__logo {
-                Margin-left: 20px;
-                Margin-right: 20px;
-            }
-
             .layout--full-width {
                 width: 100% !important;
             }
@@ -255,40 +247,35 @@
         }
     </style>
 
-    <!--[if !mso]><!-->
-    <style type="text/css">
-        @@import url(http://fonts.useso.com/css?family=Ubuntu:400,700,400italic,700italic);
-    </style>
-    <link href="http://fonts.useso.com/css?family=Ubuntu:400,700,400italic,700italic" rel="stylesheet" type="text/css" /><!--<![endif]-->
     <style type="text/css">
         body, .wrapper {
-            background-color: #171e24;
+            background-color: #f5f7fa;
         }
 
             .wrapper h1 {
-                color: #80bfc4;
+                color: #44a8c7;
                 font-size: 26px;
                 line-height: 34px;
             }
 
             .wrapper h2 {
-                color: #80bfc4;
+                color: #44a8c7;
                 font-size: 20px;
                 line-height: 28px;
             }
 
             .wrapper h3 {
-                color: #80bfc4;
+                color: #434547;
                 font-size: 16px;
                 line-height: 24px;
             }
 
             .wrapper a {
-                color: #c5dee0;
+                color: #5c91ad;
             }
 
                 .wrapper a:hover {
-                    color: #83b8bc !important;
+                    color: #375a6c !important;
                 }
 
         @@media only screen and (max-width: 620px) {
@@ -316,13 +303,13 @@
         }
 
         .column, .column__background td {
-            color: #e0dce0;
+            color: #60666d;
             font-size: 14px;
             line-height: 21px;
         }
 
         .column, .column__background td {
-            font-family: Ubuntu,sans-serif;
+            font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;
         }
 
         .mso .column, .mso .column__background td {
@@ -330,28 +317,28 @@
         }
 
         .border {
-            background-color: #000;
+            background-color: #b1c1d8;
         }
 
         .layout--no-gutter.layout--has-border:not(.layout--full-width), .layout--has-gutter.layout--has-border .column__background, .layout--full-width.layout--has-border {
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
+            border-top: 1px solid #b1c1d8;
+            border-bottom: 1px solid #b1c1d8;
         }
 
         .wrapper blockquote {
-            border-left: 4px solid #000;
+            border-left: 4px solid #b1c1d8;
         }
 
         .divider {
-            background-color: #000;
+            background-color: #b1c1d8;
         }
 
         .wrapper .btn a {
-            color: #171e24;
+            color: #fff;
         }
 
         .wrapper .btn a {
-            font-family: Ubuntu,sans-serif;
+            font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;
         }
 
         .mso .wrapper .btn a {
@@ -359,23 +346,23 @@
         }
 
         .wrapper .btn a:hover {
-            color: #171e24 !important;
+            color: #fff !important;
         }
 
         .btn--flat a, .btn--shadow a, .btn--depth a {
-            background-color: #80bfc4;
+            background-color: #5c91ad;
         }
 
         .btn--ghost a {
-            border: 1px solid #80bfc4;
+            border: 1px solid #5c91ad;
         }
 
         .preheader--inline, .footer__left {
-            color: #fff;
+            color: #b9b9b9;
         }
 
         .preheader--inline, .footer__left {
-            font-family: Ubuntu,sans-serif;
+            font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;
         }
 
         .mso .preheader--inline, .mso .footer__left {
@@ -383,39 +370,39 @@
         }
 
         .wrapper .preheader--inline a, .wrapper .footer__left a {
-            color: #fff;
+            color: #b9b9b9;
         }
 
             .wrapper .preheader--inline a:hover, .wrapper .footer__left a:hover {
-                color: #fff !important;
+                color: #b9b9b9 !important;
             }
 
         .header__logo {
-            color: #41637e;
+            color: #c3ced9;
         }
 
         .header__logo {
-            font-family: Avenir,sans-serif;
+            font-family: "Microsoft YaHei",Roboto,Tahoma,sans-serif;
         }
 
         .mso .header__logo {
-            font-family: sans-serif !important;
+            font-family: "Microsoft YaHei",Tahoma,sans-serif !important;
         }
 
         .wrapper .header__logo a {
-            color: #41637e;
+            color: #c3ced9;
         }
 
             .wrapper .header__logo a:hover {
-                color: #7096b5 !important;
+                color: #859bb1 !important;
             }
 
         .footer__share-button {
-            background-color: #0c0f12;
+            background-color: #7b7c7d;
         }
 
         .footer__share-button {
-            font-family: Ubuntu,sans-serif;
+            font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;
         }
 
         .mso .footer__share-button {
@@ -429,39 +416,40 @@
         }
     </style>
     <meta name="robots" content="noindex,nofollow" />
-    <meta property="og:title" content="元峰会报名确认" />
+    <meta property="og:title" content="元峰会报名" />
 </head>
 <!--[if mso]>
   <body class="mso">
 <![endif]-->
 <!--[if !mso]><!-->
-<body class="full-padding" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #171e24;">
+<body class="full-padding" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #f5f7fa;">
     <!--<![endif]-->
-    <div class="wrapper" style="background-color: #171e24;">
-        @*<table style="border-collapse: collapse;table-layout: fixed;color: #fff;font-family: Ubuntu,sans-serif;" align="center">
-                <tbody>
-                    <tr>
-                        <td class="preheader__snippet" style="padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
-                        <td class="preheader__webversion" style="text-align: right;padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
-                    </tr>
-                </tbody>
-            </table>*@
-
-        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #212a32;" align="center">
+    <div class="wrapper" style="background-color: #f5f7fa;">
+        <table style='border-collapse: collapse;table-layout: fixed;color: #b9b9b9;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;' align="center">
             <tbody>
                 <tr>
-                    <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 600px;">
+                    <td class="preheader__snippet" style="padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
+                    <td class="preheader__webversion" style="text-align: right;padding: 10px 0 5px 0;vertical-align: top;width: 280px;"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;" align="center" emb-background-style>
+            <tbody>
+                <tr>
+                    <td class="column" style='padding: 0;text-align: left;vertical-align: top;color: #60666d;font-size: 14px;line-height: 21px;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;width: 600px;'>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
                             <p style="Margin-top: 0;Margin-bottom: 20px;">亲爱的@(name)同学：</p>
                         </div>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;">
-                            <div style="line-height:14px;font-size:1px">&nbsp;</div>
+                            <div style="line-height:10px;font-size:1px">&nbsp;</div>
                         </div>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
-                            <h1 class="size-30" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #80bfc4;font-size: 30px;line-height: 38px;text-align: center;">感谢报名元峰会！</h1><p class="size-18" style="Margin-top: 20px;Margin-bottom: 0;font-size: 18px;line-height: 26px;text-align: center;"><span style="text-align:center">请准备下面的报名问题。当你准备好后，可以单击或轻触下面的按钮来确认报名：</span></p>
+                            <h2 class="size-24" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #44a8c7;font-size: 24px;line-height: 32px;text-align: center;">感谢报名元峰会！</h2>
+                            <p class="size-16" style="Margin-top: 16px;Margin-bottom: 0;font-size: 16px;line-height: 24px;text-align: center;">请确认你的报名。</p>
                         </div>
 
                     </td>
@@ -469,35 +457,15 @@
             </tbody>
         </table>
 
-        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;"> </div>
-
-        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #212a32;" align="center">
+        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;" align="center" emb-background-style>
             <tbody>
                 <tr>
-                    <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 400px;">
-                        @for (int i = 0; i < Model.Questions.Count; i++)
-                        {
-                            string extraStyle = "";
-                            if(i == 0)
-                            {
-                                extraStyle += "Margin-top: 24px;";
-                            }
-                            if( i == Model.Questions.Count - 1)
-                            {
-                                extraStyle += "Margin-bottom: 24px;";
-                            }
-                            <div style="Margin-left: 20px;Margin-right: 20px;@(extraStyle)">
-                                <h5 style="Margin-top: 0;Margin-bottom: 20px;">@(Model.Questions[i].Title)</h5>
-                                <p style="Margin-top: 0;Margin-bottom: 20px;">@(Model.Questions[i].Description)</p>
-                            </div>
-                        }
-                    </td>
-                    <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 200px;">
+                    <td class="column" style='padding: 0;text-align: left;vertical-align: top;color: #60666d;font-size: 14px;line-height: 21px;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;width: 600px;'>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;Margin-bottom: 24px;">
                             <div class="btn fullwidth btn--shadow" style="text-align: center;">
-                                <![if !mso]><a style="border-radius: 4px;display: inline-block;font-weight: bold;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #171e24;box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);background-color: #e0dce0;font-family: Ubuntu, sans-serif;font-size: 11px;line-height: 19px;padding: 6px 18px 7px 18px;width: 124px;" href="@confirmationUrl" data-width="124">确认报名，填写报名问题</a><![endif]>
-                                <!--[if mso]><p style="line-height:0;margin:0;"> </p><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="@confirmationUrl" style="width:160px" arcsize="8%" fillcolor="#E0DCE0" stroke="f"><v:shadow on="t" color="#B3B0B3" offset="0,2px"></v:shadow><v:textbox style="mso-fit-shape-to-text:t" inset="0px,5px,0px,4px"><center style="font-size:11px;line-height:19px;color:#171E24;font-family:sans-serif;font-weight:bold;mso-line-height-rule:exactly;mso-text-raise:3px">确认报名，填写报名问题</center></v:textbox></v:roundrect><![endif]-->
+                                <![if !mso]><a style="border-radius: 4px;display: block;font-weight: bold;text-align: center;text-decoration: none !important;transition: opacity 0.1s ease-in;color: #fff;box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);background-color: #44a8c7;font-family: sans-serif;font-size: 14px;line-height: 24px;padding: 12px 35px 13px 35px;" href="@confirmationUrl">确认报名</a><![endif]>
+                                <!--[if mso]><p style="line-height:0;margin:0;">&nbsp;</p><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="@confirmationUrl" style="width:560px" arcsize="9%" fillcolor="#44A8C7" stroke="f"><v:shadow on="t" color="#36869F" offset="0,2px"></v:shadow><v:textbox style="mso-fit-shape-to-text:t" inset="0px,11px,0px,10px"><center style="font-size:14px;line-height:24px;color:#FFFFFF;font-family:sans-serif;font-weight:bold;mso-line-height-rule:exactly;mso-text-raise:4px">确认报名</center></v:textbox></v:roundrect><![endif]-->
                             </div>
                         </div>
 
@@ -506,15 +474,16 @@
             </tbody>
         </table>
 
-        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;"> </div>
+        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;">&nbsp;</div>
 
-        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #212a32;" align="center">
+        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;" align="center" emb-background-style>
             <tbody>
                 <tr>
-                    <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #e0dce0;font-size: 14px;line-height: 21px;font-family: Ubuntu,sans-serif;width: 600px;">
+                    <td class="column" style='padding: 0;text-align: left;vertical-align: top;color: #60666d;font-size: 14px;line-height: 21px;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;width: 600px;'>
 
                         <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;Margin-bottom: 24px;">
-                            <p style="Margin-top: 0;Margin-bottom: 0;">如果无法单击上面的按钮，你也可以将以下链接复制至浏览器的地址栏：</p><p style="Margin-top: 20px;Margin-bottom: 0;"><a style="text-decoration: underline;transition: opacity 0.1s ease-in;color: #c5dee0;" href="@confirmationUrl">@confirmationUrl</a></p>
+                            <p style="Margin-top: 0;Margin-bottom: 0;">如果上面的按钮无法点击，你也可以手动访问此链接：</p>
+                            <p style="Margin-top: 20px;Margin-bottom: 0;">@confirmationUrl</p>
                         </div>
 
                     </td>
@@ -522,7 +491,37 @@
             </tbody>
         </table>
 
-        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;"> </div>
+        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;">&nbsp;</div>
+
+        <table class="layout layout--no-gutter" style="border-collapse: collapse;table-layout: fixed;Margin-left: auto;Margin-right: auto;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;" align="center" emb-background-style>
+            <tbody>
+                <tr>
+                    <td class="column" style='padding: 0;text-align: left;vertical-align: top;color: #60666d;font-size: 14px;line-height: 21px;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;width: 600px;'>
+
+                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
+                            <h2 style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #44a8c7;font-size: 20px;line-height: 28px;">报名问题</h2>
+                            <p style="Margin-top: 16px;Margin-bottom: 20px;">下面列出了所需回答的报名问题，确认报名后需要回答：</p>
+                        </div>
+                        @foreach (var question in Model.Questions)
+                        {
+                            <div style="Margin-left: 20px;Margin-right: 20px;">
+                                <h3 style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #434547;font-size: 16px;line-height: 24px;">
+                                    <strong>@question.Title</strong>
+                                </h3>
+                                <p style="Margin-top: 12px;Margin-bottom: 20px;">@question.Description</p>
+                            </div>
+                        }
+
+                        <div style="Margin-left: 20px;Margin-right: 20px;Margin-bottom: 24px;">
+                            <div style="line-height:20px;font-size:1px">&nbsp;</div>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="font-size: 20px;line-height: 20px;mso-line-height-rule: exactly;">&nbsp;</div>
 
         <table class="footer" style="border-collapse: collapse;table-layout: fixed;Margin-right: auto;Margin-left: auto;border-spacing: 0;width: 560px;" align="center">
             <tbody>
@@ -535,16 +534,18 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="footer__left" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;color: #fff;font-family: Ubuntu,sans-serif;width: 380px;">
+                        <table class="footer__left" style='border-collapse: collapse;table-layout: fixed;border-spacing: 0;color: #b9b9b9;font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", "Open Sans",sans-serif;width: 380px;'>
                             <tbody>
                                 <tr>
                                     <td class="footer__inner" style="padding: 0;font-size: 12px;line-height: 19px;">
-
                                         <div>
-                                            <div>此为系统自动邮件，请勿回复。</div>
+                                            <a href="https://ms2016.org">https://ms2016.org</a>
                                         </div>
                                         <div class="footer__permission" style="Margin-top: 18px;">
-                                            <div>若有任何疑问，请联系<a href="mailto:t123yh@outlook.com">管理员</a>。</div>
+                                            <div>如需帮助，请联系 <a href="mailto:metasummit@outlook.com">metasummit@outlook.com</a></div>
+                                        </div>
+                                        <div>
+                                            <unsubscribe>&nbsp;&nbsp;</unsubscribe>
                                         </div>
                                     </td>
                                 </tr>
