@@ -1,0 +1,11 @@
+﻿@model string
+
+<script src='//cdn.bootcss.com/tinymce/4.3.7/tinymce.min.js'></script>
+<script>
+        tinymce.init({
+            selector: '#@(Model)',
+            plugins: "image",
+            plugins: "code",
+            height: 500
+        });
+</script>

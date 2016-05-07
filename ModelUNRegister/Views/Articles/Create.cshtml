@@ -4,8 +4,6 @@
     ViewBag.Title = "创建";
 }
 
-<script src='//cdn.bootcss.com/tinymce/4.3.7/tinymce.min.js'></script>
-
 <h2>创建文章</h2>
 
 @using (Html.BeginForm()) 
@@ -52,12 +50,5 @@
 </div>
 
 @section scripts {
-    <script>
-        tinymce.init({
-            selector: '#Content',
-            plugins: "image",
-            plugins: "code",
-            height: 500
-        });
-    </script>
+    @Html.Partial("TinyMCEPartial", "Content")
 }
