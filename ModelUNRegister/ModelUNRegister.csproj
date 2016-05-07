@@ -294,7 +294,6 @@
   <ItemGroup>
     <Folder Include=".bin\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EnrollRequests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
