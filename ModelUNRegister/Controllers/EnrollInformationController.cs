@@ -77,7 +77,7 @@ namespace ModelUNRegister.Controllers
 
                 await UserManager.UpdateAsync(user);
 
-                return Redirect(Url.Action("Index"));
+                return RedirectToAction("Index");
             }
             else
             {
@@ -143,7 +143,7 @@ namespace ModelUNRegister.Controllers
                     }
                 }
                 await db.SaveChangesAsync();
-                return Redirect(Url.Action("Index"));
+                return RedirectToAction("Index");
             }
             else
             {
