@@ -1,0 +1,15 @@
+﻿@using ModelUNRegister.Models
+@model MessageViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="panel panel-@(Model.ThemeString)">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Model.Title</h3>
+    </div>
+    <div class="panel-body">
+        @Model.Message
+    </div>
+</div>
