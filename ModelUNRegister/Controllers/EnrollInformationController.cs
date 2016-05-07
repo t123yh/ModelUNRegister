@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -80,12 +81,7 @@ namespace ModelUNRegister.Controllers
             }
             else
             {
-                return View("../Shared/Message", new MessageViewModel()
-                {
-                    Title = "错误",
-                    Message = "模型不正确。",
-                    Theme = BootstrapTheme.Danger
-                });
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
 
@@ -151,12 +147,7 @@ namespace ModelUNRegister.Controllers
             }
             else
             {
-                return View("../Shared/Message", new MessageViewModel()
-                {
-                    Title = "错误",
-                    Message = "模型不正确。",
-                    Theme = BootstrapTheme.Danger
-                });
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
         protected override void Dispose(bool disposing)
