@@ -192,6 +192,14 @@ namespace ModelUNRegister.Controllers
             if (disposing)
             {
                 db.Dispose();
+                if (UserManager != null)
+                {
+                    UserManager.Dispose();
+                }
+                if (SignInManager != null)
+                {
+                    SignInManager.Dispose();
+                }
             }
             base.Dispose(disposing);
         }

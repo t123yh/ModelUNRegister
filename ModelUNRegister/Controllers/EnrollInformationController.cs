@@ -159,5 +159,17 @@ namespace ModelUNRegister.Controllers
                 });
             }
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+                if (UserManager != null)
+                {
+                    UserManager.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
     }
 }
