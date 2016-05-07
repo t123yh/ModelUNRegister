@@ -48,6 +48,7 @@ namespace ModelUNRegister.Controllers
             return View("Details", article);
         }
 
+        [AllowAnonymous]
         public ActionResult ContentPartial(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
