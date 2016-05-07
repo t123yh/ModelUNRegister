@@ -104,7 +104,7 @@ namespace ModelUNRegister.Utilities
             }
 
             if (currentValue == null && !String.IsNullOrEmpty(expressionName))
-            {
+            { 
                 // Ignore any select list (enumerable with this name) in the view data
                 currentValue = htmlHelper.ViewData.Eval(expressionName) as Enum;
             }
@@ -114,7 +114,7 @@ namespace ModelUNRegister.Utilities
                 currentValue = metadata.Model as Enum;
             }
 
-            IList<SelectListItem> selectList = EnumHelper.GetSelectList(metadata.ModelType, null);
+            IList<SelectListItem> selectList = MyEnumHelper.GetSelectList(metadata.ModelType, currentValue);
 
             return EnumRadioButtonHelper(htmlHelper, metadata, expressionName, expression, selectList, htmlAttributesDictionary, style);
         }
