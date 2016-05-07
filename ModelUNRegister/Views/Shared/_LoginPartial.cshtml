@@ -9,7 +9,18 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("你好，" + User.Identity.GetActualName() + "！", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a>你好，@User.Identity.GetActualName()！</a>
+        </li>
+        <li>
+            @if (User.Identity.IsAdministrator())
+            {
+                @Html.ActionLink("管理我的报名信息", "Index", "EnrollInformation", routeValues: null, htmlAttributes: new { title = "Manage" })
+            }
+            else
+            {
+                @Html.ActionLink("系统管理", "Index", "EnrollInformation", routeValues: null, htmlAttributes: new { title = "SystemManagement" })
+            }
+
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
     </ul>
