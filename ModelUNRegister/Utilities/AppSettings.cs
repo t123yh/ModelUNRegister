@@ -72,6 +72,14 @@ namespace ModelUNRegister.Utilities
             }
         }
 
+        public static int DuplicateEmailResetTime
+        {
+            get
+            {
+                return Setting<int>("DuplicateEmailResetTime");
+            }
+        }
+
         private static T Setting<T>(string name)
         {
             string value = ConfigurationManager.AppSettings[name];

@@ -59,6 +59,35 @@ namespace ModelUNRegister.Controllers
         {
             if (ModelState.IsValid)
             {
+                ApplicationUser olduser;
+                if ((olduser = await UserManager.FindByEmailAsync(viewModel.Email)) != null)
+                {
+                    if (!olduser.EmailConfirmed)
+                    {
+                        if (DateTime.Now - olduser.EnrollRequest.SubmissionTime > TimeSpan.FromSeconds(AppSettings.DuplicateEmailResetTime))
+                        {
+                            await UserManager.DeleteAsync(olduser);
+                        }
+                        else
+                        {
+                            return View("../Shared/Message", new MessageViewModel()
+                            {
+                                Title = "电子邮件地址重复",
+                                Message = $"该电子邮件地址已被使用，但尚未被验证。如果这是你的电子邮件地址，你可以在 {(int)((AppSettings.DuplicateEmailResetTime - (DateTime.Now - olduser.EnrollRequest.SubmissionTime).TotalSeconds) / 60)} 分钟后重新提交报名请求。",
+                                Theme = BootstrapTheme.Warning
+                            });
+                        }
+                    }
+                    else
+                    {
+                        return View("../Shared/Message", new MessageViewModel()
+                        {
+                            Title = "电子邮件地址重复",
+                            Message = $"该电子邮件地址已被使用，并且已被验证。如果希望修改报名信息，你可以在首页选择“修改报名信息”选项，并按页面提示操作。",
+                            Theme = BootstrapTheme.Warning
+                        });
+                    }
+                }
                 EnrollRequest enrollRequest = new EnrollRequest();
                 enrollRequest.RequestId = Guid.NewGuid();
                 enrollRequest.SubmissionTime = DateTime.Now;
@@ -75,7 +104,11 @@ namespace ModelUNRegister.Controllers
                 user.PhoneNumber = viewModel.PhoneNumber;
                 user.EnrollRequest = enrollRequest;
 
-                await UserManager.CreateAsync(user);
+                var result = await UserManager.CreateAsync(user);
+                if (!result.Succeeded)
+                {
+                    return Content(result.Errors.Aggregate("", (n, p) => n + " " + p));
+                }
 
                 EmailVerificationViewModel emailModel = new EmailVerificationViewModel()
                 {
