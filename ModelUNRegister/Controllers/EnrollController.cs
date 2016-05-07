@@ -179,6 +179,7 @@ namespace ModelUNRegister.Controllers
 
                 await SignInManager.SignInAsync(user, true, true);
 
+                Session["IsNewUser"] = true;
                 return RedirectToAction("Answers", "EnrollInformation");
             }
             else

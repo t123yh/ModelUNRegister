@@ -151,8 +151,17 @@ namespace ModelUNRegister.Controllers
                         }
                     }
                 }
+
                 await db.SaveChangesAsync();
-                Session["MessageId"] = MessageId.EditAnswerSuccess;
+                if (true.Equals(Session["IsNewUser"]))
+                {
+                    Session["IsNewUser"] = null;
+                    Session["MessageId"] = MessageId.EnrollSuccess;
+                }
+                else
+                {
+                    Session["MessageId"] = MessageId.EditAnswerSuccess;
+                }
                 return RedirectToAction("Index");
             }
             else
