@@ -55,7 +55,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,School,Gender,Grade,Email,PhoneNumber,QQNumber")] EnrollViewModel viewModel)
+        public async Task<ActionResult> Create(EnrollViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
