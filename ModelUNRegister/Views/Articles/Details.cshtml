@@ -1,6 +1,6 @@
 ﻿@model ModelUNRegister.Models.Article
 
-@{ 
+@{
     ViewBag.Title = Model.Title;
 }
 
@@ -11,3 +11,10 @@
 <p>
     @Html.Raw(Model.Content)
 </p>
+
+@if (ViewBag.ShowLink)
+{
+    <p>
+        文章链接：@Url.Action("ShowById", new { id = Model.Id })
+    </p>
+}

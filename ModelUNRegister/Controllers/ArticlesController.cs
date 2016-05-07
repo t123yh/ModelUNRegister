@@ -30,6 +30,7 @@ namespace ModelUNRegister.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ShowLink = true;
             return View(article);
         }
 
@@ -40,13 +41,29 @@ namespace ModelUNRegister.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = await db.Articles.Where(a => a.Keyword == id).FirstOrDefaultAsync();
+            return ShowArticle(await db.Articles.Where(a => a.Keyword == id).FirstOrDefaultAsync());
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> ShowById(Guid? id)
+        {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return ShowArticle(await db.Articles.FindAsync(id.Value));
+        }
+
+        private ActionResult ShowArticle(Article article)
+        {
             if (article == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.ShowLink = false;
             return View("Details", article);
         }
+
 
         [AllowAnonymous]
         public ActionResult ContentPartial(string id)
