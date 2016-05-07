@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace ModelUNRegister.Models
 {
@@ -21,6 +22,7 @@ namespace ModelUNRegister.Models
 
         [Required]
         [Display(Name = "文章内容")]
+        [AllowHtml]
         public string Content { get; set; }
     }
 }
