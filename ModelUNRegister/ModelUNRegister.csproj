@@ -212,11 +212,15 @@
     <Compile Include="Utilities\MyEnumHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="apple-touch-icon.png" />
     <Content Include="Content\bootstrap-material-design.css" />
     <Content Include="Content\bootstrap-material-design.min.css" />
     <Content Include="Content\ripples.css" />
     <Content Include="Content\ripples.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="favicon144.png" />
+    <Content Include="favicon192.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\global.js" />
