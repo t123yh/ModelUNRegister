@@ -40,6 +40,7 @@ namespace ModelUNRegister.Models
         public string School { get; set; }
 
         //[Required]
+        [Display(Name = "注册时间")]
         public DateTime SubmissionTime { get; set; }
 
         [Display(Name = "Email 验证时间")]
@@ -60,6 +61,6 @@ namespace ModelUNRegister.Models
 
         //[Required]
         public string IPAddress { get; set; }
-        
+
     }
 }
