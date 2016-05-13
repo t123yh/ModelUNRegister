@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModelUNRegister.Models
 {
@@ -25,6 +26,7 @@ namespace ModelUNRegister.Models
 
         public virtual ICollection<EnrollQuestionAnswer> Answers { get; set; }
 
+        [Display(Name = "姓名")]
         public string ActualName { get; set; }
     }
 
