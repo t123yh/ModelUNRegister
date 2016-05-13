@@ -259,6 +259,7 @@
     <Content Include="Content\ripples.min.css.map" />
     <Content Include="Content\bootstrap-material-design.css.map" />
     <Content Include="Content\bootstrap-material-design.min.css.map" />
+    <None Include="Properties\PublishProfiles\正式发布.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -317,7 +318,6 @@
   <ItemGroup>
     <Folder Include=".bin\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
