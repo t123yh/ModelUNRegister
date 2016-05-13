@@ -1,0 +1,70 @@
+﻿@using ModelUNRegister.Models
+@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<EnrollListItem>
+
+@{
+    ViewBag.Title = "报名列表";
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">报名列表</h3>
+    </div>
+    <div class="panel-body">
+        <p>下面列出了所有报名信息。</p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>@Html.DisplayNameFor(m => m.Request.User.ActualName)</th>
+                <th>@Html.DisplayNameFor(m => m.Request.Gender)</th>
+                <th>@Html.DisplayNameFor(m => m.Request.Grade)</th>
+                <th>@Html.DisplayNameFor(m => m.Request.SubmissionTime)</th>
+                <th>回答问题</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                @{ int inum = 0;}
+                @foreach (var req in Model)
+                {
+                    var qreq = req.Request;
+                    <th scope="row">@(inum + 1)</th>
+                    <td>@Html.DisplayFor(m => qreq.User.ActualName)</td>
+                    <td>@Html.DisplayFor(m => qreq.Gender)</td>
+                    <td>@Html.DisplayFor(m => qreq.Grade)</td>
+                    <td>@Html.DisplayFor(m => qreq.SubmissionTime, "PastDateTime")</td>
+                    <td>
+                        @{
+                            string statusClass;
+                            if (req.AnswerCount == (int)ViewBag.QuestionCount)
+                            {
+                                statusClass = "label-success";
+                            }
+                            else
+                            {
+                                statusClass = "label-warning";
+                            }
+                        }
+                        <span class="label @statusClass">@req.AnswerCount / @ViewBag.QuestionCount</span>
+                    </td>
+                    <td>
+                        @Html.ActionLink("详情", "EnrollDetails", new { id = qreq.RequestId }) |
+                        @Html.ActionLink("删除", "EnrollDelete", new { id = qreq.RequestId })
+                    </td>
+                                inum++;
+                            }
+            </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <span class="pull-right">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("EnrollList", new { page = page }))
+        </span>
+        <div class="clearfix"></div>
+    </div>
+</div>
