@@ -15,6 +15,7 @@
 @if (ViewBag.ShowLink)
 {
     <p>
-        文章链接：@Url.Action("ShowById", new { id = Model.Id })
+        @{var link = Url.Action("ShowById", "Articles", new { id = Model.Id }, Request.Url.Scheme); }
+        文章链接：<a href="@link">@link</a>
     </p>
 }
