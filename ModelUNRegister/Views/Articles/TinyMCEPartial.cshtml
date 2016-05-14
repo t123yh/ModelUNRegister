@@ -2,10 +2,18 @@
 
 <script src='//cdn.bootcss.com/tinymce/4.3.7/tinymce.min.js'></script>
 <script>
-        tinymce.init({
-            selector: '#@(Model)',
-            plugins: "image code link searchreplace",
-            forced_root_block: '',
-            height: 500
-        });
+    tinymce.init({
+        plugins: "image code link searchreplace",
+        forced_root_block: '',
+        height: 500
+    });
+
+    function AddEditor(target)
+    {
+        tinymce.EditorManager.execCommand('mceAddEditor', true, target);
+    }
+
+    function RemoveEditor(target) {
+        tinymce.EditorManager.execCommand('mceRemoveEditor', true, target);
+    }
 </script>

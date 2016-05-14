@@ -6,10 +6,10 @@
 
 <h2>创建文章</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,7 +20,7 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Keyword, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -45,10 +45,42 @@
     </div>
 }
 
+@using (Html.BeginForm())
+{
+    <div class="col-md-10">
+        <div class="radio radio-primary">
+            <label>
+                <input type="radio" name="editorOption" id="useEditor" value="use"/>
+                使用编辑器
+            </label>
+        </div>
+        <div class="radio radio-primary">
+            <label>
+                <input type="radio" name="editorOption" id="closeEditor" value="not"/>
+                不用编辑器
+            </label>
+        </div>
+    </div>
+}
+
 <div>
     @Html.ActionLink("返回列表", "Index")
 </div>
 
 @section scripts {
-    @Html.Partial("TinyMCEPartial", "Content")
+    @{ Html.RenderPartial("TinyMCEPartial", "Content"); }
+    <script>
+        $(function () {
+            $("input[name=editorOption]:radio").change(function () {
+                if ($("#useEditor").prop("checked")) {
+                    AddEditor("Content");
+                }
+                else {
+                    RemoveEditor("Content");
+                }
+            });
+            $("#useEditor").prop("checked", true).trigger("change");
+        });
+    </script>
+
 }
