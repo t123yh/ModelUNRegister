@@ -91,7 +91,7 @@ namespace ModelUNRegister.Controllers
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             EnrollRequest req = await db.EnrollRequests.FindAsync(id);
-            await UserManager.DeleteAsync(req.User);
+            await UserManager.DeleteAsync(await UserManager.FindByIdAsync(req.User.Id));
             return RedirectToAction("Index");
         }
 
