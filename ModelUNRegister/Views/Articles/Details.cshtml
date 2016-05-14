@@ -14,10 +14,8 @@
 
 @if (ViewBag.ShowLink)
 {
-    @{
-        var internalLink = Url.Action("ShowById", new { id = Model.Id });
-        var externalLink = Url.Action("ShowById", "Articles", new { id = Model.Id }, Request.Url.Scheme);
-    }
+    var internalLink = Url.Action("ShowById", new { id = Model.Id });
+    var externalLink = Url.Action("ShowById", "Articles", new { id = Model.Id }, Request.Url.Scheme);
     <p>
         文章内链：@internalLink
     </p>
