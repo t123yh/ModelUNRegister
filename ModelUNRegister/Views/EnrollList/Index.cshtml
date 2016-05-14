@@ -59,7 +59,7 @@
     </table>
     <div class="panel-footer">
         <span class="pull-right">
-            @Html.PagedListPager((IPagedList)Model, page => Url.Action("EnrollList", new { page = page }))
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
         </span>
         <div class="clearfix"></div>
     </div>

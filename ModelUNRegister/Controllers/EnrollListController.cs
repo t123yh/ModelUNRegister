@@ -71,6 +71,16 @@ namespace ModelUNRegister.Controllers
             return View(new EnrollListItem() { Request = req, AnswerCount = req.User.Answers.Count() });
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(Guid id)
+        {
+            Article article = await db.Articles.FindAsync(id);
+            db.Articles.Remove(article);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
