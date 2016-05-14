@@ -210,6 +210,7 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\EnrollInformationController.cs" />
     <Compile Include="Controllers\EnrollController.cs" />
+    <Compile Include="Controllers\EnrollListController.cs" />
     <Compile Include="Controllers\EnrollQuestionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -312,7 +313,7 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\TinyMCEPartial.cshtml" />
-    <Content Include="Views\SystemManagement\EnrollList.cshtml" />
+    <Content Include="Views\EnrollList\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PastDateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
