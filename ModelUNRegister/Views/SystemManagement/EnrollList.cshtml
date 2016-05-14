@@ -27,11 +27,12 @@
             </tr>
         </thead>
         <tbody>
-            
-            <tr>
-                @{ int inum = 0;}
-                @foreach (var req in Model)
-                {
+
+
+            @{ int inum = 0;}
+            @foreach (var req in Model)
+            {
+                <tr>
                     var qreq = req.Request;
                     <th scope="row">@(inum + 1)</th>
                     <td>@Html.DisplayFor(m => qreq.User.ActualName)</td>
@@ -56,9 +57,10 @@
                         @Html.ActionLink("详情", "EnrollDetails", new { id = qreq.RequestId }) |
                         @Html.ActionLink("删除", "EnrollDelete", new { id = qreq.RequestId })
                     </td>
-                                inum++;
-                            }
-            </tr>
+                    inum++;
+                </tr>
+             }
+
         </tbody>
     </table>
     <div class="panel-footer">
