@@ -215,3 +215,5 @@ _Pvt_Extensions/
 ModelManifest.xml
 /ModelUNRegister/Properties/PublishProfiles/本机.pubxml
 *.pubxml
+/ModelUNRegister.VC.VC.opendb
+/ModelUNRegister.VC.db
