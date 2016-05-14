@@ -199,13 +199,13 @@ namespace ModelUNRegister.Controllers
             if (disposing)
             {
                 db.Dispose();
-                if (UserManager != null)
+                if (_userManager != null)
                 {
-                    UserManager.Dispose();
+                    _userManager.Dispose();
                 }
-                if (SignInManager != null)
+                if (_signInManager != null)
                 {
-                    SignInManager.Dispose();
+                    _signInManager.Dispose();
                 }
             }
             base.Dispose(disposing);
