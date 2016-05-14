@@ -29,41 +29,32 @@
         <tbody>
 
 
-            @{ int inum = 0;}
+            @{
+                int inum = 0;
+                int questionCount = ViewBag.QuestionCount;
+            }
             @foreach (var req in Model)
             {
                 <tr>
                     @{
                         var qreq = req.Request;
+                        AnswerStatus ans = new AnswerStatus(req.AnswerCount, questionCount);
                     }
                     <th scope="row">@(inum + 1)</th>
                     <td>@Html.DisplayFor(m => qreq.User.ActualName)</td>
                     <td>@Html.DisplayFor(m => qreq.Gender)</td>
                     <td>@Html.DisplayFor(m => qreq.Grade)</td>
                     <td>@Html.DisplayFor(m => qreq.SubmissionTime, "PastDateTime")</td>
-                    <td>
-                        @{
-                            string statusClass;
-                            if (req.AnswerCount == (int)ViewBag.QuestionCount)
-                            {
-                                statusClass = "label-success";
-                            }
-                            else
-                            {
-                                statusClass = "label-warning";
-                            }
-                        }
-                        <span class="label @statusClass">@req.AnswerCount / @ViewBag.QuestionCount</span>
-                    </td>
+                    <td>@Html.DisplayFor(m => ans)</td>
                     <td>
                         @Html.ActionLink("详情", "EnrollDetails", new { id = qreq.RequestId }) |
-                        @Html.ActionLink("删除", "EnrollDelete", new { id = qreq.RequestId })
+                        @Html.ActionLink("删除", "Delete", new { id = qreq.RequestId })
                     </td>
                     @{
                         inum++;
                     }
                 </tr>
-                            }
+            }
         </tbody>
     </table>
     <div class="panel-footer">

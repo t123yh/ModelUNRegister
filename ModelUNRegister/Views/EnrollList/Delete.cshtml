@@ -1,0 +1,49 @@
+﻿@using ModelUNRegister.Models
+@model EnrollListItem
+@{
+    ViewBag.Title = "删除";
+    int questionCount = ViewBag.QuestionCount;
+    AnswerStatus ans = new AnswerStatus(Model.AnswerCount, questionCount);
+}
+
+<h2>删除报名信息</h2>
+
+<h3>真的要删除此人吗？删除后，将不可恢复。</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.User.ActualName)
+            
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.User.ActualName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.User.EmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.User.EmailConfirmed, "YesNo")
+        </dd>
+
+        <dt>
+            回答问题
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => ans)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="删除" class="btn btn-warning btn-raised" />
+        </div>
+    }
+    @Html.ActionLink("回到列表", "Index")
+</div>

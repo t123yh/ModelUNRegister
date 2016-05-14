@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -49,6 +50,25 @@ namespace ModelUNRegister.Controllers
             int pageNum = page.HasValue ? page.Value : 1;
 
             return View(await users.Select(s => new EnrollListItem() { Request = s, AnswerCount = s.User.Answers.Count() }).ToPagedListAsync(pageNum, 10));
+        }
+
+        public async Task<ActionResult> Delete(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
+
+            if (req == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.QuestionCount = await db.Questions.CountAsync();
+
+            return View(new EnrollListItem() { Request = req, AnswerCount = req.User.Answers.Count() });
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,14 @@
+﻿@model ModelUNRegister.Models.AnswerStatus
+
+@{
+    string statusClass;
+    if (Model.AnsweredCount >= Model.TotalQuestionCount)
+    {
+        statusClass = "label-success";
+    }
+    else
+    {
+        statusClass = "label-warning";
+    }
+}
+<span class="label @statusClass">@Model.AnsweredCount / @Model.TotalQuestionCount</span>
