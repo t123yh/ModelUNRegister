@@ -22,3 +22,7 @@ textarea.input-limited input,
 select {
     max-width: 280px;
 }
+
+.nounderline {
+    text-decoration:none;
+}
