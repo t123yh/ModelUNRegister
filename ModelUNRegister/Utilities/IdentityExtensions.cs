@@ -18,7 +18,7 @@ namespace ModelUNRegister.Utilities
         public static bool IsAdministrator(this IIdentity identity)
         {
             var claim = ((ClaimsIdentity)identity).FindFirst("IsAdministrator");
-            return (claim != null) ? (claim.Value == "true") : false;
+            return (claim != null) ? (claim.Value.ToLower() == "true") : false;
         }
     }
 }
