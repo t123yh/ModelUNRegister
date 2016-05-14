@@ -1,4 +1,5 @@
-﻿using ModelUNRegister.Models;
+﻿using Microsoft.AspNet.Identity.Owin;
+using ModelUNRegister.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,20 @@ namespace ModelUNRegister.Controllers
     public class EnrollListController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         public async Task<ActionResult> Index(int? page, string query)
         {
@@ -75,9 +90,8 @@ namespace ModelUNRegister.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Article article = await db.Articles.FindAsync(id);
-            db.Articles.Remove(article);
-            await db.SaveChangesAsync();
+            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
+            await UserManager.DeleteAsync(req.User);
             return RedirectToAction("Index");
         }
 
@@ -86,6 +100,10 @@ namespace ModelUNRegister.Controllers
             if (disposing)
             {
                 db.Dispose();
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                }
             }
             base.Dispose(disposing);
         }
