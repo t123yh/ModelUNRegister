@@ -49,7 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - t123yh</p>
+            <p>&copy; @DateTime.Now.Year - t123yh @Html.Action("ContentPartial", "Articles", new { id = "beian" })</p>
         </footer>
     </div>
 
