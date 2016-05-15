@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ModelUNRegister.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class EnrollListController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
