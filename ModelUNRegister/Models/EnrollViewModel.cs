@@ -20,7 +20,8 @@ namespace ModelUNRegister.Models
                 PhoneNumber = user.PhoneNumber,
                 QQNumber = user.EnrollRequest.QQNumber,
                 Gender = user.EnrollRequest.Gender,
-                Grade = user.EnrollRequest.Grade
+                Grade = user.EnrollRequest.Grade,
+                UserId = user.Id
             };
             return model;
         }
@@ -61,5 +62,7 @@ namespace ModelUNRegister.Models
         [Required(ErrorMessage = "请选择你的年级。")]
         [Display(Name = "年级")]
         public Grade? Grade { get; set; }
+
+        public string UserId { get; set; }
     }
 }
