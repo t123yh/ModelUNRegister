@@ -47,8 +47,8 @@
                     <td>@Html.DisplayFor(m => qreq.SubmissionTime, "PastDateTime")</td>
                     <td>@Html.DisplayFor(m => ans)</td>
                     <td>
-                        @Html.ActionLink("详情", "Details", new { id = qreq.RequestId }) |
-                        @Html.ActionLink("删除", "Delete", new { id = qreq.RequestId })
+                        @Html.ActionLink("详情", "Details", new { id = qreq.User.Id }) |
+                        @Html.ActionLink("删除", "Delete", new { id = qreq.User.Id })
                     </td>
                     @{
                         inum++;

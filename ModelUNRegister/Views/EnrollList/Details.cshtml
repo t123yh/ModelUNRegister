@@ -44,10 +44,74 @@
 
             <tr>
                 <th scope="row">报名问题回答</th>
-                <td><a id="viewAnswer" data-uid="@Model.UserId">立即查看</a></td>
+                <td><a id="viewAnswer" data-uid="@Model.UserId" data-toggle="modal" data-target="#viewAnswerModal">立即查看</a></td>
             </tr>
 
         </tbody>
     </table>
 </div>
 
+@*<div class="modal fade" id="viewAnswerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="modal fade" id="viewAnswerModal" tabindex="-1" role="dialog" aria-labelledby="viewAnswer">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="answerTitle">报名回答</h4>
+            </div>
+            <div class="modal-body" id="answerBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="questionTemplate" type="x-tmpl-mustache">
+    {{#answers}}
+    <h3>{{title}}</h3>
+    <p>{{description}}</p>
+    <div class="well">{{answer}}</div>
+    {{/answers}}
+</script>
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#viewAnswerModal").on("show.bs.modal", function (e) {
+                $("#answerBody").text("加载中");
+                var invoker = $(e.relatedTarget);
+                $.ajax({
+                    url: '/EnrollList/GetAnswers',
+                    data: { id: invoker.data("uid") },
+                    success: function (data) {
+                        $("#answerBody").html(Mustache.render($("#questionTemplate").html(), data));
+                    }
+                });
+            });
+
+            $("#viewAnswerModal").on("shown.bs.modal", function (e) {
+
+            });
+        })
+    </script>
+}

@@ -75,16 +75,16 @@ namespace ModelUNRegister.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
+            ApplicationUser user = await UserManager.FindByIdAsync(id.Value.ToString());
 
-            if (req == null)
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
             ViewBag.QuestionCount = await db.Questions.CountAsync();
 
-            return View(new EnrollListItem() { Request = req, AnswerCount = req.User.Answers.Count() });
+            return View(new EnrollListItem() { Request = user.EnrollRequest, AnswerCount = user.Answers.Count() });
         }
 
         public async Task<ActionResult> Details(Guid? id)
@@ -94,23 +94,42 @@ namespace ModelUNRegister.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
+            ApplicationUser user = await UserManager.FindByIdAsync(id.ToString());
 
-            if (req == null)
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
-            return View(EnrollViewModel.CreateFromUser(req.User));
+            return View(EnrollViewModel.CreateFromUser(user));
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
-            await UserManager.DeleteAsync(await UserManager.FindByIdAsync(req.User.Id));
+            await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id.ToString()));
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAnswers(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ApplicationUser user = await UserManager.FindByIdAsync(id.Value.ToString());
+
+            var answers = user.Answers.Select(ans => new { title = ans.Question.Title, description = ans.Question.Description, answer = ans.AnswerContent });
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return Json(new { answers = answers }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
