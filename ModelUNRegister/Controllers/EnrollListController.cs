@@ -87,6 +87,23 @@ namespace ModelUNRegister.Controllers
             return View(new EnrollListItem() { Request = req, AnswerCount = req.User.Answers.Count() });
         }
 
+        public async Task<ActionResult> Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            EnrollRequest req = await db.EnrollRequests.FindAsync(id);
+
+            if (req == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(EnrollViewModel.CreateFromUser(req.User));
+        }
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)

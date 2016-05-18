@@ -1,0 +1,53 @@
+﻿@using ModelUNRegister.Models
+@model EnrollViewModel
+
+@{
+    ViewBag.Title = "详情";
+}
+
+@functions
+{
+    public HelperResult DisplayData<TValue>(System.Linq.Expressions.Expression<Func<EnrollViewModel, TValue>> exp)
+    {
+        return DisplayDataTable(Html.DisplayNameFor(exp), Html.DisplayFor(exp));
+    }
+}
+
+
+@helper DisplayDataTable(MvcHtmlString name, MvcHtmlString data)
+{
+    <tr>
+        <th scope="row">@name</th>
+        <td>@data</td>
+    </tr>
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">报名信息</h3>
+    </div>
+    <table class="table">
+        <tbody>
+            @DisplayData(item => item.Name)
+
+            @DisplayData(item => item.Gender)
+
+            @DisplayData(item => item.School)
+
+            @DisplayData(item => item.Grade)
+
+            @DisplayData(item => item.Email)
+
+            @DisplayData(item => item.PhoneNumber)
+
+            @DisplayData(item => item.QQNumber)
+
+            <tr>
+                <th scope="row">报名问题回答</th>
+                <td><a id="viewAnswer" data-uid="@Model.UserId">立即查看</a></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
