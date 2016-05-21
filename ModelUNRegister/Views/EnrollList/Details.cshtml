@@ -101,7 +101,7 @@
                 $("#answerBody").text("加载中");
                 var invoker = $(e.relatedTarget);
                 $.ajax({
-                    url: '/EnrollList/GetAnswers',
+                    url: '@Url.Action("GetAnswers", "EnrollList")',
                     data: { id: invoker.data("uid") },
                     success: function (data) {
                         $("#answerBody").html(Mustache.render($("#questionTemplate").html(), data));
