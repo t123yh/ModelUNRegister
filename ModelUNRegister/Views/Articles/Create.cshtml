@@ -68,7 +68,7 @@
 </div>
 
 @section scripts {
-    @{ Html.RenderPartial("TinyMCEPartial", "Content"); }
+    @{ Html.RenderPartial("../Shared/TinyMCEPartial", "Content"); }
     <script>
         $(function () {
             $("input[name=editorOption]:radio").change(function () {

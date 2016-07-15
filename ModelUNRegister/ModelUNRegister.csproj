@@ -315,7 +315,7 @@
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
-    <Content Include="Views\Articles\TinyMCEPartial.cshtml" />
+    <Content Include="Views\Shared\TinyMCEPartial.cshtml" />
     <Content Include="Views\EnrollList\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PastDateTime.cshtml" />
     <Content Include="Views\EnrollList\Delete.cshtml" />
