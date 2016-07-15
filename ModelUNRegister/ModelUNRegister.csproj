@@ -223,6 +223,7 @@
     <Compile Include="Models\AnswerStatus.cs" />
     <Compile Include="Models\AnswerViewModel.cs" />
     <Compile Include="Models\ArticleModels.cs" />
+    <Compile Include="Models\CourseModels.cs" />
     <Compile Include="Models\EmailVerificationViewModels.cs" />
     <Compile Include="Models\EnrollListViewModel.cs" />
     <Compile Include="Models\EnrollViewModel.cs" />
