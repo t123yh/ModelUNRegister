@@ -1,4 +1,6 @@
-﻿
+﻿@using ModelUNRegister.Models;
+@model CourseSelectionViewModel
+    
 @{
     ViewBag.Title = "课程选择";
 }
@@ -24,21 +26,31 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model.Courses)
+                {
                 <tr>
                     <th scope="row">
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" checked="">
+                                    @{ 
+                                        var check = "";
+                                        if (Model.SelectedCourses.Contains(item.Id))
+                                        {
+                                            check = "checked";
+                                        }
+                                    }
+                                    <input type="checkbox" name="SelectedCourses" value="@item.Id" @check>
                                 </label>
                             </div>
                         </div>
                     </th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>ABC</td>
+                    <td>@item.Name</td>
+                    <td>@item.From</td>
+                    <td>@item.CourseName</td>
                     <td>查看课程介绍</td>
                 </tr>
+                }
             </tbody>
         </table>
     }
