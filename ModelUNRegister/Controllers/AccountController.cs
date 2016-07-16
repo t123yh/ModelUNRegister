@@ -112,9 +112,11 @@ namespace ModelUNRegister.Controllers
                     EmailLoginEmailModel emailModel = new EmailLoginEmailModel();
                     emailModel.Name = olduser.Id;
                     emailModel.Id = olduser.Id;
+                    emailModel.Token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id);
+                    
                     await UserManager.SendEmailAsync(olduser.Id, "元峰会 - 登录确认",
                         EmailHelper.RenderPartialToString(this, "EmailLoginEmail", emailModel));
-
+                    
                     return View("../Shared/Message", new MessageViewModel()
                     {
                         Title = "已发送验证邮件",

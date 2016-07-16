@@ -80,6 +80,8 @@ namespace ModelUNRegister.Models
         public string Name { get; set; }
 
         public string Id { get; set; }
+
+        public string Token { get; set; }
     }
 
     //public class RegisterViewModel
