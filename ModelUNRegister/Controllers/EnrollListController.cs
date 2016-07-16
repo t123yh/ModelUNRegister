@@ -109,6 +109,19 @@ namespace ModelUNRegister.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
+            var user1 = await db.Users.Where(u => u.Id == id.ToString()).FirstOrDefaultAsync();
+
+            if (user1 == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Answers.RemoveRange(user1.Answers);
+            if(user1.EnrollRequest != null)
+                db.EnrollRequests.Remove(user1.EnrollRequest);
+
+            await db.SaveChangesAsync();
+            
             await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id.ToString()));
             return RedirectToAction("Index");
         }
