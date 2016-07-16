@@ -29,6 +29,6 @@ namespace ModelUNRegister.Models
         [AllowHtml]
         public string CourseContent { get; set; }
 
-        public ICollection<ApplicationUser> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }
