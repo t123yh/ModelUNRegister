@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ModelUNRegister.Models;
+using ModelUNRegister.Utilities;
 
 namespace ModelUNRegister.Controllers
 {
@@ -22,7 +23,7 @@ namespace ModelUNRegister.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +35,9 @@ namespace ModelUNRegister.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -89,6 +90,44 @@ namespace ModelUNRegister.Controllers
                     ModelState.AddModelError("", "无效的登录尝试。");
                     return View(model);
             }
+        }
+
+        [AllowAnonymous]
+        public ActionResult EmailLogin(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EmailLogin(EmailLoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser olduser;
+                if ((olduser = await UserManager.FindByEmailAsync(model.Email)) != null)
+                {
+                    EmailLoginEmailModel emailModel = new EmailLoginEmailModel();
+                    emailModel.Name = olduser.Id;
+                    emailModel.Id = olduser.Id;
+                    await UserManager.SendEmailAsync(olduser.Id, "元峰会 - 登录确认",
+                        EmailHelper.RenderPartialToString(this, "EmailLoginEmail", emailModel));
+
+                    return View("../Shared/Message", new MessageViewModel()
+                    {
+                        Title = "已发送验证邮件",
+                        Message = $"验证邮件已发至你的电子邮箱，请按邮件内的提示操作。",
+                        Theme = BootstrapTheme.Success
+                    });
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "指定的用户不存在。");
+                }
+            }
+            return View(model);
         }
 
         //

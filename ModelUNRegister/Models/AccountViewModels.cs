@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ModelUNRegister.Models
@@ -71,6 +72,14 @@ namespace ModelUNRegister.Models
 
         [Display(Name = "下次自动登录")]
         public bool RememberMe { get; set; }
+    }
+
+    public class EmailLoginEmailModel
+    {
+        [Display(Name = "姓名")]
+        public string Name { get; set; }
+
+        public string Id { get; set; }
     }
 
     //public class RegisterViewModel
