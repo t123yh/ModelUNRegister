@@ -8,8 +8,8 @@
 
 <div class="row">
     <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("EmailLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        <section id="loginFormSection">
+            @using (Html.BeginForm("EmailLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "loginForm" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>使用电子邮件地址登录。</h4>
@@ -69,8 +69,8 @@
         在你单击按钮后，我们将向你的电子邮件地址 {{email}} 发送一封电子邮件，电子邮件中将包含指引你登录的链接。
     </script>
     <script>
-        $("#baseInfoSubmit").click(function () {
-            if ($("#createForm").valid()) {
+        $("#loginButton").click(function () {
+            if ($("#loginForm").valid()) {
                 var template = $("#emailPrompt").html();
                 Mustache.parse(template);
                 var rendered = Mustache.render(template, { email: $("#Email").val()});
