@@ -18,7 +18,7 @@ namespace ModelUNRegister.Controllers
         // GET: HomePageLinks
         public async Task<ActionResult> Index()
         {
-            return View(await db.HomePageLinks.ToListAsync());
+            return View((await db.HomePageLinks.ToListAsync()).OrderBy(l => l.Index));
         }
 
         // GET: HomePageLinks/Details/5

@@ -15,7 +15,7 @@ namespace ModelUNRegister.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var links = await db.HomePageLinks.ToArrayAsync();
+            var links = (await db.HomePageLinks.ToArrayAsync()).OrderBy(l => l.Index);
             return View(links);
         }
 
