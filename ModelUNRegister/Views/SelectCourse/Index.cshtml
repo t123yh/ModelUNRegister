@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "课程选择";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">选择课程</h3>
+    </div>
+    <div class="panel-body">
+        请选择至多 4 门你愿意参加的课程。我们会尊重你的意见，但最终的课程安排将视实际情况而定。
+    </div>
+    @using (Html.BeginForm())
+    {
+        <table class="table middle-table">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>导师</th>
+                    <th>来自</th>
+                    <th>课程名称</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked="">
+                                </label>
+                            </div>
+                        </div>
+                    </th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>ABC</td>
+                    <td>查看课程介绍</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>

@@ -215,6 +215,7 @@
     <Compile Include="Controllers\EnrollQuestionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SelectCourseController.cs" />
     <Compile Include="Controllers\SystemManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -329,6 +330,7 @@
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Account\EmailLogin.cshtml" />
     <Content Include="Views\Account\EmailLoginEmail.cshtml" />
+    <Content Include="Views\SelectCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />
