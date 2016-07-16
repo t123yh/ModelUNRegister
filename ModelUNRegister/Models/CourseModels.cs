@@ -29,6 +29,10 @@ namespace ModelUNRegister.Models
         [AllowHtml]
         public string CourseContent { get; set; }
 
+        [Display(Name = "授课语言")]
+        [Required]
+        public string Language { get; set; }
+
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

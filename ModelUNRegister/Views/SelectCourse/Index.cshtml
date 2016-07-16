@@ -1,6 +1,6 @@
 ﻿@using ModelUNRegister.Models;
 @model CourseSelectionViewModel
-    
+
 @{
     ViewBag.Title = "课程选择";
 }
@@ -11,16 +11,25 @@
         <h3 class="panel-title">选择课程</h3>
     </div>
     <div class="panel-body">
-        请选择至多 4 门你愿意参加的课程。我们会尊重你的意见，但最终的课程安排将视实际情况而定。
+        <p>请选择至多 4 门你愿意参加的课程。我们会尊重你的意见，但最终的课程安排将视实际情况而定。确认后，请单击页面底部的“确定”按钮。</p>
+        @if(!string.IsNullOrWhiteSpace(Session["message"] as string))
+        {
+            <p class="text-success">@Session["message"]</p>
+            Session["message"] = null;
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(m => m.SelectedCourses, "", new { @class = "text-danger" })
     </div>
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
         <table class="table middle-table">
             <thead>
                 <tr>
                     <th>选择</th>
                     <th>导师</th>
                     <th>来自</th>
+                    <th>授课语言</th>
                     <th>课程名称</th>
                     <th></th>
                 </tr>
@@ -28,30 +37,34 @@
             <tbody>
                 @foreach (var item in Model.Courses)
                 {
-                <tr>
-                    <th scope="row">
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    @{ 
-                                        var check = "";
-                                        if (Model.SelectedCourses.Contains(item.Id))
-                                        {
-                                            check = "checked";
+                    <tr>
+                        <th scope="row">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        @{
+                                            var check = "";
+                                            if (Model.SelectedCourses.Contains(item.Id))
+                                            {
+                                                check = "checked";
+                                            }
                                         }
-                                    }
-                                    <input type="checkbox" name="SelectedCourses" value="@item.Id" @check>
-                                </label>
+                                        <input type="checkbox" name="SelectedCourses" value="@item.Id" @check>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <td>@item.Name</td>
-                    <td>@item.From</td>
-                    <td>@item.CourseName</td>
-                    <td>查看课程介绍</td>
-                </tr>
-                }
+                        </th>
+                        <td>@item.Name</td>
+                        <td>@item.From</td>
+                        <td>@item.CourseName</td>
+                        <td>@item.Language</td>
+                        <td>查看课程介绍</td>
+                    </tr>
+                                            }
             </tbody>
         </table>
-    }
+        <div class="panel-footer">
+            <input type="submit" value="确定" class="btn btn-primary btn-raised"/>
+        </div>
+                                            }
 </div>
