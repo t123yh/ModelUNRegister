@@ -48,7 +48,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,From,CourseName,CourseContent")] Course course)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,From,CourseName,Language,CourseContent")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace ModelUNRegister.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,From,CourseName,CourseContent")] Course course)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,From,CourseName,Language,CourseContent")] Course course)
         {
             if (ModelState.IsValid)
             {
