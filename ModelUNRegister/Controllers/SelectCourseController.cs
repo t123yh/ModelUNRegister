@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ModelUNRegister.Utilities;
 
 namespace ModelUNRegister.Controllers
 {
@@ -15,13 +16,13 @@ namespace ModelUNRegister.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        private ApplicationDbContext _db;
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         public ApplicationDbContext DbContext
         {
             get
             {
-                return _db ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                return _db;
             }
         }
 
@@ -38,12 +39,47 @@ namespace ModelUNRegister.Controllers
         }
 
         // GET: SelectCourse
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(bool? success)
         {
-
             var courses = await DbContext.Courses.ToArrayAsync();
             var selected = (await UserManager.FindByIdAsync(User.Identity.Name)).Courses.Select(c => c.Id);
             return View(new CourseSelectionViewModel() { Courses = courses, SelectedCourses = selected });
+        }
+
+        [HttpPost]
+        [ActionName("Index")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(CourseSelectionViewModel model)
+        {
+            if (model.SelectedCourses.Count() > 4)
+            {
+                ModelState.AddModelError("SelectedCourses", "你最多只能选择 4 门课程。");
+                model.Courses = await DbContext.Courses.ToArrayAsync();
+                return View(model);
+            }
+            else
+            {
+                var user = await DbContext.Users.Where(u => u.UserName == User.Identity.Name).FirstAsync();
+                user.Courses.Clear();
+                foreach (var courseId in model.SelectedCourses)
+                {
+                    var courseToAdd = DbContext.Courses.First(c => c.Id == courseId);
+                    user.Courses.Add(courseToAdd);
+                }
+                await DbContext.SaveChangesAsync();
+                Session["message"] = "已保存你的设置。";
+                return RedirectToAction("Index");
+            }
+            
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
