@@ -115,7 +115,8 @@ namespace ModelUNRegister.Controllers
                     {
                         userId = olduser.Id,
                         token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id),
-                        returnUrl = returnUrl
+                        returnUrl = returnUrl,
+                        rememberMe = model.RememberMe
                     }, Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(olduser.Id, "元峰会 - 登录确认",
@@ -134,6 +135,23 @@ namespace ModelUNRegister.Controllers
                 }
             }
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> EmailLoginConfirmation(string userId, string token, string returnUrl, bool rememberMe)
+        {
+            if (await UserManager.VerifyUserTokenAsync(userId, "Login", token))
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+                await SignInManager.SignInAsync(user, rememberMe, true);
+                return RedirectToLocal(returnUrl);
+            }
+            return View("../Shared/Message", new MessageViewModel()
+            {
+                Title = "登录失败", 
+                Message = "很抱歉，Token 不正确。",
+                Theme = BootstrapTheme.Warning
+            });
         }
 
         //
