@@ -39,7 +39,7 @@ namespace ModelUNRegister.Controllers
                                               select s;
 
             var questionCount = await db.Questions.CountAsync();
-
+            ViewBag.Query = query;
             if (query != "*")
             {
                 if (string.IsNullOrWhiteSpace(query))
