@@ -328,6 +328,7 @@
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Account\EmailLogin.cshtml" />
+    <Content Include="Views\Account\EmailLoginEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />
