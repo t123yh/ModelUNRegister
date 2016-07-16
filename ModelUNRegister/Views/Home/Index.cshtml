@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ModelUNRegister.Models
+@model IEnumerable<HomePageLink>
+@{
     ViewBag.Title = "主页";
 }
 
@@ -10,6 +12,28 @@
     </p>
 </div>
 
-@{
-    Html.RenderAction("ContentPartial", "Articles", new { id = "mainpart" });
-}
+@*@{
+        Html.RenderAction("ContentPartial", "Articles", new { id = "mainpart" });
+    }*@
+<div class="list-group">
+    @{ var marray = Model.ToArray();}
+    @for (int i = 0; i < marray.Length; i++)
+    {
+        var link = marray[i];
+        <div class="list-group-item">
+            <a href="@link.Link" class="nounderline">
+                <div class="row-action-primary">
+                    <i class="material-icons">@link.Icon</i>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading">@link.Name</h4>
+                    <p class="list-group-item-text">@link.Description</p>
+                </div>
+            </a>
+        </div>
+        if (i != marray.Length - 1)
+        {
+            <div class="list-group-separator">&nbsp;</div>
+        }
+    }
+</div>

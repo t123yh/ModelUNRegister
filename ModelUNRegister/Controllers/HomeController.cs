@@ -1,6 +1,9 @@
-﻿using System;
+﻿using ModelUNRegister.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,9 +11,21 @@ namespace ModelUNRegister.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var links = await db.HomePageLinks.ToArrayAsync();
+            return View(links);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

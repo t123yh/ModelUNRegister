@@ -31,4 +31,6 @@ namespace ModelUNRegister.Models
         [Display(Name = "链接")]
         public string Link { get; set; }
     }
+
+    
 }
