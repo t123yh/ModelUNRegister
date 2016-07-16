@@ -62,6 +62,17 @@ namespace ModelUNRegister.Models
         public bool RememberMe { get; set; }
     }
 
+    public class EmailLoginViewModel
+    {
+        [Required]
+        [Display(Name = "电子邮件地址")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Display(Name = "下次自动登录")]
+        public bool RememberMe { get; set; }
+    }
+
     //public class RegisterViewModel
     //{
     //    [Required]
