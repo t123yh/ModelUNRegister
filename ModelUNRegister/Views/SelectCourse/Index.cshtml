@@ -58,7 +58,7 @@
                         <td>@item.From</td>
                         <td>@item.CourseName</td>
                         <td>@item.Language</td>
-                        <td>查看课程介绍</td>
+                        <td><a data-cid="@item.Id" data-toggle="modal" data-target="#viewCourseModal">查看课程介绍</a></td> 
                     </tr>
                                             }
             </tbody>
@@ -68,3 +68,38 @@
         </div>
                                             }
 </div>
+
+<div class="modal fade" id="viewCourseModal" tabindex="-1" role="dialog" aria-labelledby="viewAnswer">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="answerTitle">课程介绍</h4>
+            </div>
+            <div class="modal-body" id="courseBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#viewCourseModal").on("show.bs.modal", function (e) {
+                $("#courseBody").text("加载中");
+                var invoker = $(e.relatedTarget);
+                $.ajax({
+                    url: '@Url.Action("CourseDetails", "SelectCourse")',
+                    data: { id: invoker.data("cid") },
+                    success: function (data) {
+                        $("#courseBody").html(data);
+                    }
+                });
+            });
+        })
+    </script>
+}

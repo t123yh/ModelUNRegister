@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ModelUNRegister.Utilities;
+using System.Net;
 
 namespace ModelUNRegister.Controllers
 {
@@ -71,6 +72,20 @@ namespace ModelUNRegister.Controllers
                 return RedirectToAction("Index");
             }
             
+        }
+
+        public async Task<ActionResult> CourseDetails(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = await DbContext.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(course);
         }
 
         protected override void Dispose(bool disposing)

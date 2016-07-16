@@ -1,0 +1,15 @@
+﻿@using ModelUNRegister.Models
+@model Course
+<h1>@Model.CourseName</h1>
+
+<dl>
+    <dt>@Html.DisplayNameFor(m => m.Name) </dt>
+    <dd>@Html.DisplayFor(m => m.Name)</dd>
+    <dt>@Html.DisplayNameFor(m => m.From)</dt>
+    <dd>@Html.DisplayFor(m => m.From)</dd>
+    <dt>@Html.DisplayNameFor(m => m.CourseName)</dt>
+    <dd>@Html.DisplayFor(m => m.CourseName)</dd>
+    <dt>@Html.DisplayNameFor(m => m.Language)</dt>
+    <dd>@Html.DisplayFor(m => m.Language)</dd>
+</dl>
+@Html.Raw(Model.CourseContent)
