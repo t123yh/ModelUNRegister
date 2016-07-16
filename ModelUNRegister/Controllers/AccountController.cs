@@ -110,11 +110,12 @@ namespace ModelUNRegister.Controllers
                 if ((olduser = await UserManager.FindByEmailAsync(model.Email)) != null)
                 {
                     EmailLoginEmailModel emailModel = new EmailLoginEmailModel();
-                    emailModel.Name = olduser.Id;
+                    emailModel.Name = olduser.ActualName;
                     emailModel.Link = Url.Action("EmailConfirmation", "Enroll", new
                     {
                         userId = olduser.Id,
-                        token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id)
+                        token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id),
+                        returnUrl = returnUrl
                     }, Request.Url.Scheme);
 
                     await UserManager.SendEmailAsync(olduser.Id, "元峰会 - 登录确认",
