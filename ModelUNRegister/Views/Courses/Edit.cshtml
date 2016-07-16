@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Course</h4>
         <hr />
@@ -59,3 +59,12 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts {
+    @{ Html.RenderPartial("../Shared/TinyMCEPartial", "Content"); }
+    <script>
+        $(function () {
+            AddEditor("CourseContent");
+        });
+    </script>
+}

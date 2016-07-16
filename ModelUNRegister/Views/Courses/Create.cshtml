@@ -57,3 +57,12 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts {
+    @{ Html.RenderPartial("../Shared/TinyMCEPartial", "Content"); }
+    <script>
+        $(function () {
+            AddEditor("CourseContent");
+        });
+    </script>
+}
