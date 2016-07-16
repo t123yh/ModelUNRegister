@@ -11,6 +11,7 @@ using ModelUNRegister.Models;
 
 namespace ModelUNRegister.Controllers
 {
+    [Authorize(Roles = "Administrators")]
     public class HomePageLinksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
