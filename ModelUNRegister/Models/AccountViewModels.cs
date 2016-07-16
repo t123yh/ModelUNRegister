@@ -79,9 +79,7 @@ namespace ModelUNRegister.Models
         [Display(Name = "姓名")]
         public string Name { get; set; }
 
-        public string Id { get; set; }
-
-        public string Token { get; set; }
+        public string Link { get; set; }
     }
 
     //public class RegisterViewModel

@@ -111,9 +111,12 @@ namespace ModelUNRegister.Controllers
                 {
                     EmailLoginEmailModel emailModel = new EmailLoginEmailModel();
                     emailModel.Name = olduser.Id;
-                    emailModel.Id = olduser.Id;
-                    emailModel.Token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id);
-                    
+                    emailModel.Link = Url.Action("EmailConfirmation", "Enroll", new
+                    {
+                        userId = olduser.Id,
+                        token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id)
+                    }, Request.Url.Scheme);
+
                     await UserManager.SendEmailAsync(olduser.Id, "元峰会 - 登录确认",
                         EmailHelper.RenderPartialToString(this, "EmailLoginEmail", emailModel));
                     
