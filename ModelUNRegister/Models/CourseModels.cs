@@ -13,7 +13,7 @@ namespace ModelUNRegister.Models
         public Guid Id { get; set; }
 
         [Required]
-        [Display(Name = "姓名")]
+        [Display(Name = "导师")]
         public string Name { get; set; }
 
         [Display(Name = "来自")]
