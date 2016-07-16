@@ -26,3 +26,7 @@ select {
 .nounderline {
     text-decoration:none;
 }
+
+.middle-table td, th {
+    vertical-align: middle !important;
+}
