@@ -5,6 +5,7 @@
 }
 
 <h2>@ViewBag.Title。</h2>
+@Html.ActionLink("使用 Email 登录", "EmailLogin", new { ReturnUrl = ViewBag.ReturnUrl })
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
