@@ -111,7 +111,7 @@ namespace ModelUNRegister.Controllers
                 {
                     EmailLoginEmailModel emailModel = new EmailLoginEmailModel();
                     emailModel.Name = olduser.ActualName;
-                    emailModel.Link = Url.Action("EmailLoginConfirmation", "Enroll", new
+                    emailModel.Link = Url.Action("EmailLoginConfirmation", "Account", new
                     {
                         userId = olduser.Id,
                         token = await UserManager.GenerateUserTokenAsync("Login", olduser.Id),
