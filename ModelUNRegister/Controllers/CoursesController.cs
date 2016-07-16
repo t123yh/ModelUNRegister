@@ -11,6 +11,7 @@ using ModelUNRegister.Models;
 
 namespace ModelUNRegister.Controllers
 {
+    [Authorize(Roles = "Adminisrators")]
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
