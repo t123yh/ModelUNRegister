@@ -35,10 +35,48 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="登录" class="btn btn-default" />
+
+                        <button type="button" class="btn btn-primary btn-raised" id="loginButton">
+                            登录
+                        </button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="EmailModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">电子邮件地址验证</h4>
+                            </div>
+                            <div class="modal-body">
+                                <span id="emailMessage"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="发送电子邮件" class="btn btn-primary" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
         </section>
     </div>
 </div>
+
+
+@section scripts {
+    <script id="emailPrompt" type="x-tmpl-mustache">
+        在你单击按钮后，我们将向你的电子邮件地址 {{email}} 发送一封电子邮件，电子邮件中将包含指引你登录的链接。
+    </script>
+    <script>
+        $("#baseInfoSubmit").click(function () {
+            if ($("#createForm").valid()) {
+                var template = $("#emailPrompt").html();
+                Mustache.parse(template);
+                var rendered = Mustache.render(template, { email: $("#Email").val()});
+                $("#emailMessage").text(rendered);
+                $('#emailModal').modal('show');
+            }
+        })
+    </script>
+}
