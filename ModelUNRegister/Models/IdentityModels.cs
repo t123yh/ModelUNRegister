@@ -26,6 +26,8 @@ namespace ModelUNRegister.Models
 
         public virtual ICollection<EnrollQuestionAnswer> Answers { get; set; }
 
+        public virtual ICollection<Course> Courses { get; set; }
+
         [Display(Name = "姓名")]
         public string ActualName { get; set; }
     }
@@ -70,6 +72,17 @@ namespace ModelUNRegister.Models
                 .WithMany()
                 .Map(conf => conf.MapKey("QuestionId"))
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Course>()
+                .HasMany(c => c.Users)
+                .WithMany(u => u.Courses)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("CourseId");
+                    cs.MapRightKey("UserId");
+                    cs.ToTable("UserCourses");
+                });
+                
         }
 
         public DbSet<EnrollRequest> EnrollRequests { get; set; }
