@@ -94,5 +94,7 @@ namespace ModelUNRegister.Models
         public System.Data.Entity.DbSet<ModelUNRegister.Models.Article> Articles { get; set; }
 
         public System.Data.Entity.DbSet<ModelUNRegister.Models.Course> Courses { get; set; }
+
+        public System.Data.Entity.DbSet<ModelUNRegister.Models.HomePageLink> HomePageLinks { get; set; }
     }
 }

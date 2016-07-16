@@ -214,6 +214,7 @@
     <Compile Include="Controllers\EnrollListController.cs" />
     <Compile Include="Controllers\EnrollQuestionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomePageLinksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SelectCourseController.cs" />
     <Compile Include="Controllers\SystemManagementController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Models\EmailVerificationViewModels.cs" />
     <Compile Include="Models\EnrollListViewModel.cs" />
     <Compile Include="Models\EnrollViewModel.cs" />
+    <Compile Include="Models\HomePageLinkModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\EnrollModels.cs" />
@@ -340,6 +342,11 @@
     <Content Include="Views\Account\EmailLoginEmail.cshtml" />
     <Content Include="Views\SelectCourse\Index.cshtml" />
     <Content Include="Views\SelectCourse\CourseDetails.cshtml" />
+    <Content Include="Views\HomePageLinks\Create.cshtml" />
+    <Content Include="Views\HomePageLinks\Delete.cshtml" />
+    <Content Include="Views\HomePageLinks\Details.cshtml" />
+    <Content Include="Views\HomePageLinks\Edit.cshtml" />
+    <Content Include="Views\HomePageLinks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />
