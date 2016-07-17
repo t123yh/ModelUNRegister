@@ -52,6 +52,10 @@ namespace ModelUNRegister.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(CourseSelectionViewModel model)
         {
+            if (model.SelectedCourses == null)
+            {
+                model.SelectedCourses = new Guid[0];
+            }
             if (model.SelectedCourses.Count() > 4)
             {
                 ModelState.AddModelError("SelectedCourses", "你最多只能选择 4 门课程。");
@@ -71,7 +75,7 @@ namespace ModelUNRegister.Controllers
                 Session["message"] = "已保存你的设置。";
                 return RedirectToAction("Index");
             }
-            
+
         }
 
         public async Task<ActionResult> CourseDetails(Guid? id)
