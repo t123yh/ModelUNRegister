@@ -33,6 +33,7 @@ namespace ModelUNRegister.Models
         [Required]
         public string Language { get; set; }
 
+        [Display(Name = "选课学生")]
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

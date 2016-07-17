@@ -39,7 +39,22 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourseContent)
+            @Html.Raw(Model.CourseContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users)
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach(var stu in Model.Users)
+                {
+                    <li>
+                        @stu.ActualName
+                    </li>
+                }
+            </ul>
         </dd>
 
     </dl>
