@@ -21,10 +21,14 @@ namespace ModelUNRegister.Models
                 QQNumber = user.EnrollRequest.QQNumber,
                 Gender = user.EnrollRequest.Gender,
                 Grade = user.EnrollRequest.Grade,
-                UserId = user.Id
+                UserId = user.Id,
+                Courses = user.Courses
             };
             return model;
         }
+
+        [Display(Name = "报名课程")]
+        public ICollection<Course> Courses { get; set; }
 
         [Required(ErrorMessage = "请填写你的姓名。")]
         [Display(Name = "姓名")]
